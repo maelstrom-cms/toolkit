@@ -3,7 +3,9 @@ import { render } from 'react-dom'
 
 class Registry {
 
-    items = [];
+    constructor() {
+        this.items = []
+    }
 
     register(components) {
         Object.keys(components).forEach(name => {
