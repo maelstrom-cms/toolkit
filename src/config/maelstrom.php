@@ -88,17 +88,17 @@ return [
         'enabled' => true,
 
         /*
+         * If you need to protect this endpoint at route level
+         * you can provide some middleware, which can abort(401) the request.
+         */
+        'guard' => 'auth',
+
+        /*
          * We use the current user in "some" places - mostly on the
          * "edit my account" page, if you use the built in controller
          * then you can change the model here.
          */
         'model' => \App\User::class,
-
-        /*
-         * If you need to protect this endpoint at route level
-         * you can provide some middleware, which can abort(401) the request.
-         */
-        'guard' => null,
     ],
 
     /*
@@ -118,7 +118,7 @@ return [
          * If you need to protect this endpoint at route level
          * you can provide some middleware, which can abort(401) the request.
          */
-        'guard' => null,
+        'guard' => 'auth',
 
         /*
          * These form options will be included in the AJAX endpoint.
@@ -135,26 +135,7 @@ return [
          * ],
          *
          */
-        'models' => [
-            'categories' => [
-                'model' => App\Category::class,
-                'scopes' => [],
-                'value' => 'id',
-                'label' => 'name',
-            ],
-            'tags' => [
-                'model' => App\Tag::class,
-                'scopes' => [],
-                'value' => 'id',
-                'label' => 'name',
-            ],
-            'pages' => [
-                'model' => App\Page::class,
-                'scopes' => [],
-                'value' => 'id',
-                'label' => 'name',
-            ]
-        ]
+        'models' => [],
     ],
 
     /*
@@ -175,7 +156,7 @@ return [
          * If you need to protect this endpoint at route level
          * you can provide some middleware, which can abort(401) the request.
          */
-        'guard' => null,
+        'guard' => 'auth',
 
         /*
          * Provide the disk from filesystems.php which will be
