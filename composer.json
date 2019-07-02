@@ -1,5 +1,5 @@
 {
-    "name": "maelstrom-cms/core",
+    "name": "maelstrom-cms/toolkit",
     "description": "A CMS Toolkit built on Laravel and React",
     "type": "library",
     "require": {
