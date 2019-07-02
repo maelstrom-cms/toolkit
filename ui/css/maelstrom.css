@@ -1,0 +1,169 @@
+@import 'antd/dist/antd.css';
+
+@import 'tailwindcss/components';
+
+@import 'tailwindcss/utilities';
+
+.ant-btn-group + .ant-btn-group {
+    margin-left: 8px
+}
+
+.ant-form-item-children .ap-input-icon.ap-icon-clear svg {
+    width: 12px;
+    height: auto
+}
+
+.ant-form-item-children .ap-input-icon.ap-icon-pin svg {
+    width: 14px;
+    height: auto
+}
+
+.ant-form-item-children .ap-input-icon {
+    right: 10px
+}
+
+.ant-form-explain,
+.ant-form-extra {
+    margin-top: 5px;
+}
+
+.ant-form-item-children .react-mde .grip .icon {
+    height: 10px
+}
+
+.ant-form-item-children .react-mde .grip {
+    text-align: center;
+    height: 10px;
+    color: #000;
+    cursor: s-resize
+}
+
+.ant-form-item-children .react-mde .mde-header {
+    background: none
+}
+
+.ant-form-item-children .react-mde .mde-tabs {
+    display: none !important
+}
+
+.ant-form-item.colour-picker .ant-form-item-control {
+    line-height: initial
+}
+
+.ant-form-item.colour-picker .compact-picker input + span,
+.ant-form-item.colour-picker .compact-picker .flexbox-fix > :first-child {
+    transform: translateY(-2px)
+}
+
+.ant-form-item.colour-picker .compact-picker input {
+    width: 100% !important
+}
+
+.ant-form-item.colour-picker .material-picker input {
+    text-align: left
+}
+
+.ant-form-item.colour-picker .material-picker {
+    width: 130px !important;
+    height: 130px !important
+}
+
+.ant-form-item.colour-picker input {
+    line-height: 100%;
+    text-align: center
+}
+
+.ant-form-item.colour-picker {
+    line-height: initial
+}
+
+.ant-input-affix-wrapper .ant-input:not(:last-child) {
+    padding-right: 54px
+}
+
+.ant-input-group-compact .ant-input-search .ant-input {
+    border-radius: 0
+}
+
+.ant-form-item-children .ant-transfer-list-with-footer:last-child {
+    padding-bottom: 0;
+}
+
+.ant-form-item-children .ant-transfer-list-with-footer:last-child .ant-transfer-list-footer {
+    display: none;
+}
+
+.ant-input-suffix .ant-input-clear-icon {
+    transform: translateY(1px)
+}
+
+.ant-menu-root li:first-child {
+    //margin-top: 25px
+}
+
+.ant-menu-root {
+    min-height: 100vh
+}
+
+.ant-pagination-item-link .anticon {
+    top: 50%;
+    position: relative;
+    transform: translateY(-50%)
+}
+
+.ant-select-selection--multiple .ant-select-selection__choice__remove {
+    transform: translateY(5px)
+}
+
+.ant-spin-text {
+    margin-top: 6px
+}
+
+.ant-transfer-list-search-action {
+    transform: translateY(9px)
+}
+
+.ant-upload-list-item {
+    margin-top: 8px;
+    margin-bottom: 5px
+}
+
+.ant-upload-list-text {
+    max-width: 700px
+}
+
+.border {
+    border-style: solid
+}
+
+.iframe-mode .js-header,
+.iframe-mode .js-nav {
+    display: none
+}
+
+.multi-uploader .ant-form-explain {
+    margin-top: 5px;
+    margin-bottom: -5px
+}
+
+.npm__react-simple-code-editor__textarea:focus {
+    outline: 0
+}
+
+.tabs-navigation .ant-tabs-content {
+    display: none !important
+}
+
+.tabs-navigation .ant-tabs-vertical {
+    min-width: 120px;
+    padding-right: 4px;
+    margin-right: 24px
+}
+
+.media-column a:not(:last-child) {
+    margin-right: 10px;
+}
+
+.cloak {
+    visibility: hidden;
+}
