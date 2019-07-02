@@ -53,14 +53,12 @@ return [
      * Where does your asset pipeline output our CSS?
      * (relative to the public folder)
      */
-    'core_css_path' => '',
+    'core_css_path' => '/css/maelstrom.css',
 
     /*
      * Will include custom css files after maelstrom.css on every page.
      */
-    'custom_css' => [
-        '/css/maelstrom.css'
-    ],
+    'custom_css' => [],
 
     /*
      * Will include custom js files after maelstrom.js on every page.
@@ -70,9 +68,7 @@ return [
      * publish the `maelstrom:partials/footer-scripts.blade.php`
      * and use the `mix()` helper in there.
      */
-    'custom_js' => [
-        '/js/app.js',
-    ],
+    'custom_js' => [],
 
     /*
      * Although we use the IoC container to allow you to overwrite
