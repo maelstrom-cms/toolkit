@@ -52,11 +52,11 @@ export default class MediaManager extends React.Component {
                 this.setState({
                     attached: [...this.state.value ].map(id => {
                         return this.state.items.find(item => `${item.id}` === `${id}`)
-                    }),
+                    }).filter(i => i),
                 })
             } else {
                 this.setState({
-                    attached: [this.state.items.find(i => `${i.id}` === `${this.state.value}`)],
+                    attached: [this.state.items.find(i => `${i.id}` === `${this.state.value}`)].filter(i => i),
                 })
             }
 
@@ -246,7 +246,7 @@ export default class MediaManager extends React.Component {
                     destroyOnClose={ true }
                     afterVisibleChange={ drawerActuallyOpen => this.setState({ drawerActuallyOpen }) }
                 >
-                    { this.state.drawerActuallyOpen && <SplitView { ...this.props } { ...this.state } getItems={ this.getItems } setActive={ this.setActive } attachMedia={ this.attachMedia } /> }
+                    { this.state.drawerActuallyOpen && <SplitView { ...this.props } { ...this.state } getItems={ this.getItems } setActive={ this.setActive } removeMedia={ this.removeMedia } attachMedia={ this.attachMedia } /> }
                 </Drawer>
             </>
         )

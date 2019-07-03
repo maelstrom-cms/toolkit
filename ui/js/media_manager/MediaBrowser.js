@@ -76,4 +76,3 @@ export default class MediaBrowser extends React.Component {
         )
     }
 }
-
