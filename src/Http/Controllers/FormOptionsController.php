@@ -82,7 +82,7 @@ class FormOptionsController extends Controller
         $query = $model->newQuery();
 
         // Such as attach model scopes! for filtering/restricting results.
-        if (is_array($settings['scopes'])) {
+        if (isset($settings['scopes']) && is_array($settings['scopes'])) {
             $query->scopes($settings['scopes']);
         }
 

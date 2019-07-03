@@ -7,6 +7,8 @@ export default class Uploader extends React.Component {
     constructor(props) {
         super(props)
 
+        this.csrf = props.csrf
+
         this.state = {
             busy: false,
         }
@@ -32,6 +34,12 @@ export default class Uploader extends React.Component {
         return true
     }
 
+    uploadData = payload => {
+        payload._token = this.csrf
+
+        return payload
+    }
+
     render() {
         return (
             <div>
@@ -43,6 +51,7 @@ export default class Uploader extends React.Component {
                     onChange={ this.onChange }
                     showUploadList={ false }
                     withCredentials={ true }
+                    data={ this.uploadData }
                     beforeUpload={ this.beforeUpload }
                 >
                     <p className="ant-upload-drag-icon">

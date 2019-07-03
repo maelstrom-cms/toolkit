@@ -18,4 +18,5 @@
     data-error="{{ $errors->first($name) }}"
     data-required="{{ bool_to_string($required ?? false) }}"
     data-max-items="{{ $max_items ?? 1 }}"
+    data-csrf="{{ csrf_token() }}"
 ></div>

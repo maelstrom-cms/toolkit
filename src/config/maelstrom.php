@@ -91,7 +91,7 @@ return [
          * If you need to protect this endpoint at route level
          * you can provide some middleware, which can abort(401) the request.
          */
-        'guard' => 'auth',
+        'guard' => ['web', 'auth'],
 
         /*
          * We use the current user in "some" places - mostly on the
@@ -118,7 +118,7 @@ return [
          * If you need to protect this endpoint at route level
          * you can provide some middleware, which can abort(401) the request.
          */
-        'guard' => 'auth',
+        'guard' => ['web', 'auth'],
 
         /*
          * These form options will be included in the AJAX endpoint.
@@ -156,7 +156,7 @@ return [
          * If you need to protect this endpoint at route level
          * you can provide some middleware, which can abort(401) the request.
          */
-        'guard' => 'auth',
+        'guard' => ['web', 'auth'],
 
         /*
          * Provide the disk from filesystems.php which will be
