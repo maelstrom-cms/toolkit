@@ -57,9 +57,11 @@ export default class EntryTable extends Component {
 
         this.entries = ParseProps(props, 'entries', [])
 
+        this.searchableColumns = this.columns.filter(c => c.searchable)
+
         this.search = this.uri.hasQuery('search') ? JSON.parse(this.uri.query(true).search) : {
             query: null,
-            column: this.columns[0].title,
+            column: this.searchableColumns.length ? this.searchableColumns[0].title : null,
         }
 
         this.state = {
@@ -269,10 +271,14 @@ export default class EntryTable extends Component {
     renderSearch = () => <Input.Search defaultValue={ this.search.query } onChange={ event => this.doSearch(event) } onSearch={ query => this.doSearch(query) } placeholder="Search for..." style={{ width: '70%' }} enterButton allowClear />;
 
     renderFilters = () => {
+        if (!this.searchableColumns.length) {
+            return null
+        }
+
         return (
             <Input.Group compact>
                 <Select onChange={ value => this.search.column = value } defaultValue={ this.search.column } style={{ width: '30%' }}>
-                    { this.columns.filter(c => c.searchable).map(column => <Select.Option key={ column.dataIndex } value={ column.searchColumn || column.dataIndex }>{ column.title }</Select.Option>)}
+                    { this.searchableColumns.map(column => <Select.Option key={ column.dataIndex } value={ column.searchColumn || column.dataIndex }>{ column.title }</Select.Option>)}
                 </Select>
                 { this.renderSearch() }
             </Input.Group>
