@@ -1,23 +1,20 @@
 @extends('maelstrom::layouts.wrapper')
 
-@section('title')
-    {{ $title }}
-@endsection
-
 @section('main')
+    @hasSection('title')
     <div class="bg-gray-100 p-3 flex justify-between items-center">
         <div>
-            <h1 class="m-0">{{ $title }}</h1>
+            <h1 class="m-0">@yield('title')</h1>
         </div>
         @if (isset($breadcrumbs))
         <div class="pr-2">
             @include('maelstrom::components.breadcrumbs', [
-                'title' => $title,
-                'crumbs' => $breadcrumbs,
+                'breadcrumbs' => $breadcrumbs,
             ])
         </div>
         @endif
     </div>
+    @endif
 
     @include('maelstrom::components.loader')
 

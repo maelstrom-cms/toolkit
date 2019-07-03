@@ -7,19 +7,18 @@ if ($panel = $panel ?? maelstrom()) {
 
     $routes = $panel->getRoutes();
     $name = $panel->getEntityName(true);
-    $crumbs = $panel->getBreadcrumbs($crumbs ?? []);
+    $breadcrumbs = $panel->getBreadcrumbs($breadcrumbs ?? []);
 } else {
     $method = '';
     $routes = [];
     $name = null;
-    $crumbs = $crumbs ?? [];
+    $breadcrumbs = $breadcrumbs ?? [];
 } ?>
 <div
     data-component="Breadcrumbs"
     data-method="{{ mb_strtolower($method) }}"
     data-routes='@json($routes)'
     data-entity-name="{{ $name }}"
-    data-crumbs='@json($crumbs)'
+    data-crumbs='@json($breadcrumbs)'
 >
 </div>
-

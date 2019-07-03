@@ -16,7 +16,7 @@ return [
      */
     'breadcrumb' => [
         [
-            'label' => 'Home',
+            'label' => 'Admin',
             'url' => '/admin'
         ]
     ],
