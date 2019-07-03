@@ -1,7 +1,7 @@
 <div
     class="tab-single js-tab-single hidden"
-    title="{{ $title }}"
-    data-tab="{{ $id ?? Str::slug($title) }}"
+    title="{{ $label }}"
+    data-tab="{{ $id ?? Str::slug($label) }}"
     data-icon="{{ $icon ?? null }}"
     data-active="{{ bool_to_string($active ?? false) }}"
 >

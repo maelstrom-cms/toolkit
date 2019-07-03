@@ -5,8 +5,8 @@ import dotGet from 'lodash/get'
 export default class TextLinkColumn extends Component {
 
     get linkText() {
-        if (this.props.label) {
-            return this.props.label
+        if (this.props.labelText) {
+            return this.props.labelText
         }
 
         return dotGet(this.props.record, this.props.labelIndex, `${ this.props.labelIndex } not found.`)

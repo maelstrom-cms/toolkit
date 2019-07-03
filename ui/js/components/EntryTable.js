@@ -28,12 +28,23 @@ export default class EntryTable extends Component {
             column.sortOrder = (this.sort.column === column.dataIndex ? this.sort.direction : column.sortOrder)
             column.dataIndex = column.dataIndex || <div>no dataIndex provided</div>
 
+            if (column.label) {
+                column.title = column.label
+            }
+
+            if (column.filters) {
+                column.filters = column.filters.map(filter => {
+                    filter.text = filter.text || filter.label
+
+                    return filter
+                })
+            }
+
             if (column.type) {
                 column.render = (text, record, index) => {
                     const component = ComponentRegistry.resolve(column.type)
 
                     if (component) {
-
                         if (column.type === 'MediaManagerColumn') {
                             if (Array.isArray(text)) {
                                 this.mediaIds = this.mediaIds.concat(text)
