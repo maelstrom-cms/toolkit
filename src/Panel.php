@@ -354,6 +354,12 @@ class Panel
     {
         $prefix = $prefix ?: mb_strtolower(Str::plural($this->entityName, 2));
 
+        // If we cannot find the above route, we try finding an alternative one,
+        // If neither of these work, you should just call `setupRoutes()` yourself with the correct prefix.
+        if (!Route::has($prefix . '.index')) {
+            $prefix = mb_strtolower($this->entityName);
+        }
+        
         $this->routes = [
             'index' => $prefix . '.index',
             'show' => $prefix . '.show',

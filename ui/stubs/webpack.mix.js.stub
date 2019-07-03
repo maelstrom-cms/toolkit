@@ -5,7 +5,7 @@ mix.react('resources/js/maelstrom.js', 'public/js');
 mix.postCss('resources/sass/maelstrom.css', 'public/css', [
     require('postcss-import'),
     require('tailwindcss'),
-])
+]);
 
 mix.webpackConfig({
     module: {

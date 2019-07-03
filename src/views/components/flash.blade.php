@@ -2,7 +2,7 @@
     $panel = $panel ?? maelstrom();
     $flash = session()->get('flash', '');
 
-    $message = is_string($flash) ? $flash : ($message['message'] ?? '');
+    $message = is_string($flash) ? $flash : ($flash['message'] ?? '');
     $style = $flash['type'] ?? 'info';
 @endphp
 
