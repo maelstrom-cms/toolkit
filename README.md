@@ -18,5 +18,10 @@ Maelstrom uses a cutting edge stack to afford you the ability to create the most
 
 
 # [Visit Documentation](https://www.maelstrom-cms.com/getting-started/)
-
 The repository for the documentation can been accessed at [maelstrom-cms/documentation](https://github.com/maelstrom-cms/documentation)
+
+# Support
+
+- [Report Bugs](https://github.com/maelstrom-cms/toolkit/issues/new?assignees=OwenMelbz&labels=bug%2C+triage&template=bug_report.md&title=%5BBug%5D+)
+- [Ask a Question](https://github.com/maelstrom-cms/toolkit/issues/new?assignees=OwenMelbz&labels=question&template=question.md&title=%5BQuestion%5D+)
+- [Email Us](mailto:talk@maelstrom-cms.com)
