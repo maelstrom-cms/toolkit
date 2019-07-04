@@ -21,6 +21,10 @@ export default class TagsInput extends SelectInput {
     getDefaultValue = () => {
         let value = this.originalValue
 
+        if (!value) {
+            return []
+        }
+
         value = this.state.options.filter(o => value.indexOf(`${o.key}`) !== -1)
 
         if (this.wildOptions) {
@@ -33,7 +37,7 @@ export default class TagsInput extends SelectInput {
                 }
             })
         }
-
+        
         return value
     }
 

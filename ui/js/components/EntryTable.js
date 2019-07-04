@@ -32,6 +32,10 @@ export default class EntryTable extends Component {
                 column.title = column.label
             }
 
+            if (column.sortable) {
+                column.sorter = column.sortable
+            }
+
             if (column.filters) {
                 column.filters = column.filters.map(filter => {
                     filter.text = filter.text || filter.label
