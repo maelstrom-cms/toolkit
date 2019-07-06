@@ -1,7 +1,5 @@
 # Maelstrom CMS Toolkit
 
-> This is the monorepo for Maelstrom, it contains both the npm package and the laravel package.
-
 A CMS toolkit for intermediate to advanced development teams who love React and Laravel.
 
 Maelstrom is a collection of Laravel and React components to help you flesh out your own control panels using as much of vanilla Laravel as possible.
