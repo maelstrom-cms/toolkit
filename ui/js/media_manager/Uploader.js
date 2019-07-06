@@ -7,8 +7,6 @@ export default class Uploader extends React.Component {
     constructor(props) {
         super(props)
 
-        this.csrf = props.csrf
-
         this.state = {
             busy: false,
         }
@@ -35,31 +33,29 @@ export default class Uploader extends React.Component {
     }
 
     uploadData = payload => {
-        payload._token = this.csrf
+        payload._token = this.props.csrf
 
         return payload
     }
 
     render() {
         return (
-            <div>
-                <Upload.Dragger
-                    multiple
-                    name="file"
-                    accept="image/*,.pdf,.svg"
-                    action={ this.props.route }
-                    onChange={ this.onChange }
-                    showUploadList={ false }
-                    withCredentials={ true }
-                    data={ this.uploadData }
-                    beforeUpload={ this.beforeUpload }
-                >
-                    <p className="ant-upload-drag-icon">
-                        <Icon type={ !this.state.busy ? 'inbox' : 'loading' } />
-                    </p>
-                    <p className="ant-upload-text">Click or drag file to this area to upload</p>
-                </Upload.Dragger>
-            </div>
+            <Upload.Dragger
+                multiple
+                name="file"
+                accept="image/*,.pdf,.svg"
+                action={ this.props.route }
+                onChange={ this.onChange }
+                showUploadList={ false }
+                withCredentials={ true }
+                data={ this.uploadData }
+                beforeUpload={ this.beforeUpload }
+            >
+                <p className="ant-upload-drag-icon">
+                    <Icon type={ !this.state.busy ? 'inbox' : 'loading' } />
+                </p>
+                <p className="ant-upload-text">Click or drag file to this area to upload</p>
+            </Upload.Dragger>
         )
     }
 

@@ -24,8 +24,6 @@ export default class EditPane extends React.Component {
     constructor(props) {
         super(props)
 
-        this.csrf = props.csrf
-
         this.state = {
             busy: false,
             id: this.props.active.id,
@@ -57,7 +55,7 @@ export default class EditPane extends React.Component {
             url: `${this.props.route}/${this.props.active.id}`,
             method: 'DELETE',
             data: {
-                _token: this.csrf,
+                _token: this.props.csrf,
             },
             success: () => {
                 message.success(`${this.state.name} has been deleted.`)
@@ -76,11 +74,10 @@ export default class EditPane extends React.Component {
         this.setState({
             busy: true,
         }, () => {
-
             const data = new FormData()
 
             data.append('_method', 'PUT')
-            data.append('_token', this.csrf)
+            data.append('_token', this.props.csrf)
             data.append('name', this.state.name || '')
             data.append('alt', this.state.alt || '')
             data.append('description', this.state.description || '')

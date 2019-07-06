@@ -227,7 +227,6 @@ export default class MediaManager extends React.Component {
     render() {
         return (
             <>
-
                 <Form.Item
                     label={ this.props.label }
                     validateStatus={ this.props.error ? 'error' : null }
