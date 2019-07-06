@@ -1295,7 +1295,7 @@ class Panel
             // Normal delete...
             case 'delete':
                 $count = $this->query->getModel()->destroy($selected);
-                $results = $count . ' items deleted.';
+                $results = sprintf('%d %s deleted.', $count, Str::plural('item', $count));
                 break;
             // Permanently delete - only available for SoftDeletes
             case 'perm_delete':
@@ -1304,7 +1304,7 @@ class Panel
                     $this->isTrashable && $this->query->withTrashed()->find($id)->forceDelete();
                 }
 
-                $results = count($selected) . ' items permanently deleted.';
+                $results = sprintf('%d %s permanently deleted.', $count, Str::plural('item', count($selected)));
                 break;
             // Restore soft deleted models - only available for SoftDeletes
             case 'restore':
@@ -1313,7 +1313,7 @@ class Panel
                     $this->isTrashable && $this->query->withTrashed()->find($id)->restore();
                 }
 
-                $results = count($selected) . ' items restored.';
+                $results = sprintf('%d %s restored.', $count, Str::plural('item', count($selected)));
                 break;
             default:
             // If no action was found above, we return false. So you can check that we did
