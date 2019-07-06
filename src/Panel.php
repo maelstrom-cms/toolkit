@@ -359,7 +359,7 @@ class Panel
         if (!Route::has($prefix . '.index')) {
             $prefix = mb_strtolower($this->entityName);
         }
-        
+
         $this->routes = [
             'index' => $prefix . '.index',
             'show' => $prefix . '.show',
@@ -1283,6 +1283,7 @@ class Panel
 
         // This is an array of IDs to run the action against.
         $selected = $this->request->get('selected', []);
+        $count = count($selected);
 
         // As this is bulk management, so if we can't loop, we ain't doing anything.
         if (!is_iterable($selected)) {
@@ -1291,29 +1292,38 @@ class Panel
 
         $results = null;
 
+        /*
+         * When running bulk actions we loop around the models rather than mass deleting to make sure
+         * that any eloquent or other events fire correctly for you.
+         */
+
         switch ($action) {
             // Normal delete...
             case 'delete':
-                $count = $this->query->getModel()->destroy($selected);
+                foreach ($selected as $id) {
+                    /** @noinspection PhpUndefinedMethodInspection */
+                    $this->isTrashable && $this->query->getModel()->newQuery()->withTrashed()->find($id)->delete();
+                }
+
                 $results = sprintf('%d %s deleted.', $count, Str::plural('item', $count));
                 break;
             // Permanently delete - only available for SoftDeletes
             case 'perm_delete':
                 foreach ($selected as $id) {
                     /** @noinspection PhpUndefinedMethodInspection */
-                    $this->isTrashable && $this->query->withTrashed()->find($id)->forceDelete();
+                    $this->isTrashable && $this->query->getModel()->newQuery()->withTrashed()->find($id)->forceDelete();
                 }
 
-                $results = sprintf('%d %s permanently deleted.', $count, Str::plural('item', count($selected)));
+                $results = sprintf('%d %s permanently deleted.', $count, Str::plural('item', $count));
                 break;
             // Restore soft deleted models - only available for SoftDeletes
             case 'restore':
                 foreach ($selected as $id) {
                     /** @noinspection PhpUndefinedMethodInspection */
-                    $this->isTrashable && $this->query->withTrashed()->find($id)->restore();
+                    $this->isTrashable && $this->query->getModel()->newQuery()->withTrashed()->find($id)->restore();
                 }
 
-                $results = sprintf('%d %s restored.', $count, Str::plural('item', count($selected)));
+                $results = sprintf('%d %s restored.', $count, Str::plural('item', $count));
                 break;
             default:
             // If no action was found above, we return false. So you can check that we did
