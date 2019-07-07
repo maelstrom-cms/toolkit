@@ -23,7 +23,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Maelstrom\\Tests\\": "tests\\Laravel"
+            "Maelstrom\\Tests\\": "tests"
         }
     },
     "extra": {

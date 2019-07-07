@@ -21,7 +21,7 @@
     </php>
     <testsuites>
         <testsuite name="Maelstrom Test Suite">
-            <directory suffix="Test.php">./tests/Laravel</directory>
+            <directory suffix="Test.php">./tests</directory>
         </testsuite>
     </testsuites>
 </phpunit>

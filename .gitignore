@@ -4,3 +4,4 @@ vendor
 .idea
 *.cache
 *.lock
+package-lock.json

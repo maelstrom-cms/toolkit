@@ -51,5 +51,18 @@
   "bugs": {
     "url": "https://github.com/maelstrom-cms/toolkit"
   },
-  "homepage": "https://www.maelstrom-cms.com/"
+  "homepage": "https://www.maelstrom-cms.com/",
+  "devDependencies": {
+    "@babel/core": "^7.5.0",
+    "@babel/preset-env": "^7.5.0",
+    "babel-jest": "^24.8.0",
+    "enzyme": "^3.10.0",
+    "jest": "^24.8.0",
+    "react-test-renderer": "^16.8.6",
+    "react-testing-library": "^8.0.1"
+  },
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch"
+  }
 }
