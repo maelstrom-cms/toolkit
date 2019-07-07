@@ -168,7 +168,7 @@ export default class MediaManager extends React.Component {
     }
 
     DragHandle = SortableHandle(() => {
-        return <Icon type="colum-height" className="cursor-move mr-3" />
+        return <Icon type="column-height" className="cursor-move mr-3" />
     })
 
     SortableItem = SortableElement(({ item }) => {

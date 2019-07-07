@@ -145,7 +145,7 @@ export default class Repeater extends Component {
     };
 
     DragHandle = SortableHandle(() => {
-        return <Icon role="button" title={ `Reorder ${ this.button }` } type="colum-height" className="cursor-move" />
+        return <Icon role="button" title={ `Reorder ${ this.button }` } type="column-height" className="cursor-move" />
     })
 
     SortableItem = SortableElement(({ value, index }) => {

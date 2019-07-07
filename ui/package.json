@@ -20,7 +20,7 @@
     "@babel/plugin-proposal-class-properties": "^7.4",
     "@babel/preset-react": "^7.0",
     "algolia-places-react": "^1.4",
-    "antd": "^3.19",
+    "antd": "^3.20",
     "array-move": "^2.1",
     "autoprefixer": "^9.6",
     "babel-eslint": "^10.0",
