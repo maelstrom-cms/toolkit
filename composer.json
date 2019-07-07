@@ -21,11 +21,20 @@
             "Maelstrom\\": "src"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Maelstrom\\Tests\\": "tests\\Laravel"
+        }
+    },
     "extra": {
         "laravel": {
             "providers": [
                 "Maelstrom\\Providers\\MaelstromServiceProvider"
             ]
         }
+    },
+    "require-dev": {
+        "orchestra/testbench": "^3.8",
+        "phpunit/phpunit": "^8.2"
     }
 }
