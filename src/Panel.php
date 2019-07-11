@@ -1354,7 +1354,11 @@ class Panel
             case 'delete':
                 foreach ($selected as $id) {
                     /** @noinspection PhpUndefinedMethodInspection */
-                    $this->isTrashable && $this->query->getModel()->newQuery()->withTrashed()->find($id)->delete();
+                    if ($this->isTrashable) {
+                        $this->query->getModel()->newQuery()->withTrashed()->find($id)->delete();
+                    } else {
+                        $this->query->getModel()->newQuery()->find($id)->delete();
+                    }
                 }
 
                 $results = sprintf('%d %s deleted.', $count, Str::plural('item', $count));
