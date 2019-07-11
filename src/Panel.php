@@ -779,6 +779,18 @@ class Panel
     }
 
     /**
+     * The straight forward getter to return the defined eager loaded relationships from setEagerLoad.
+     *
+     * Everything stored within here will get attached to the getEntries query.
+     *
+     * @return array
+     */
+    public function getEagerLoad(): array
+    {
+        return $this->eagerLoad;
+    }
+
+    /**
      * The straight forward getter to return the defined relationships from setRelationships.
      *
      * Everything stored within here will get mapped up during "handleRelationships()"
@@ -1222,8 +1234,8 @@ class Panel
      */
     public function applyRelationships(): Panel
     {
-        if ($this->eagerLoad) {
-            $this->query->with($this->eagerLoad);
+        if ($this->getEagerLoad()) {
+            $this->query->with($this->getEagerLoad());
         }
 
         return $this;
@@ -1267,7 +1279,7 @@ class Panel
      */
     public function handleRelationships(): Panel
     {
-        foreach ($this->relationships as $field => $relationshipName) {
+        foreach ($this->getRelationships() as $field => $relationshipName) {
 
             // If the relationship isn't present on the request, just skip over this
             // iteration of the loop.
