@@ -196,6 +196,17 @@ class Panel
     public $eagerLoad = [];
 
     /**
+     * Sometimes a full entry transformer is overkill, and you just want some
+     * extra attributes added before the view is rendered, this is useful if you have
+     * accessors that you want to add to the serialisation process e.g.
+     *
+     * $category->post_count = $category->posts()->count();
+     *
+     * @var array
+     */
+    public $with = [];
+
+    /**
      * A key/value map defined via setRelationships(), this maps the name
      * of posted data to the name of a relationship method
      *
@@ -536,6 +547,19 @@ class Panel
     }
 
     /**
+     * Defines which attributes should be attached to the model when serialising.
+     *
+     * @param array $attributes
+     * @return Panel
+     */
+    public function setWithAttributes(array $attributes): Panel
+    {
+        $this->with = $attributes;
+
+        return $this;
+    }
+
+    /**
      * Defines the currently active entry, normally you call this
      * at the start of your edit methods to load the model into Maelstrom.
      *
@@ -860,6 +884,17 @@ class Panel
     }
 
     /**
+     * The straight forward getter to return the defined attributes to append from setWithAttributes();
+     *
+     *
+     * @return array
+     */
+    public function getWithAttributes(): array
+    {
+        return $this->with;
+    }
+
+    /**
      * Returns back the configuration mapping provided by "setUploadables()"
      *
      * @return array
@@ -1043,6 +1078,11 @@ class Panel
             // you to the edit screen.
             if (!$entry->getAttribute('panelRoutes')) {
                 $entry->setAttribute('panelRoutes', $this->getRoutes($entry));
+            }
+
+            // We append any attributes that are needed for serialisation.
+            foreach ($this->getWithAttributes() as $attribute) {
+                $entry->append($attribute);
             }
 
             // Here we apply the transformation if you actually supplied one.
