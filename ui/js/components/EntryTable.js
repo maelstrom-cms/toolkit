@@ -28,11 +28,15 @@ export default class EntryTable extends Component {
             column.sortOrder = (this.sort.column === column.dataIndex ? this.sort.direction : column.sortOrder)
             column.dataIndex = column.dataIndex || <div>no dataIndex provided</div>
 
-            if (column.label) {
+            if (column.name && !column.dataIndex) {
+                column.dataIndex = column.name
+            }
+
+            if (column.label && !column.title) {
                 column.title = column.label
             }
 
-            if (column.sortable) {
+            if (column.sortable && !column.sorter) {
                 column.sorter = column.sortable
             }
 
