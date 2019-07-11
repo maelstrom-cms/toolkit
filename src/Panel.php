@@ -896,8 +896,8 @@ class Panel
     }
 
     /**
-     * The straight forward getter to return the defined attributes to append from setWithAttributes();
-     *
+     * The straight forward getter to return the defined attributes
+     * to append from setWithAttributes();
      *
      * @return array
      */
