@@ -2,28 +2,35 @@ import React, { Component } from 'react'
 import { Menu, Icon } from 'antd'
 import debounce from 'lodash/debounce'
 import ComponentRegistry from '../support/Registry'
+import ParseProps from '../support/ParseProps'
 
 export default class Sidebar extends Component {
 
-    state = {
-        collapsed: (localStorage.getItem('maelstrom::menu_collapsed') || 'n') === 'y',
-    };
+    constructor(props) {
+        super(props)
 
-    items = JSON.parse(this.props.items);
+        this.root = ParseProps(props, 'root', '/admin')
 
-    width = this.props.width || 210;
+        this.items = ParseProps(props, 'items', [])
 
-    height = this.props.height || 'calc(100vh - 56px)';
+        this.width = ParseProps(props, 'width', 210)
 
-    menuRef = React.createRef();
+        this.height = ParseProps(props, 'height', 'calc(100vh - 56px)')
 
-    guessSelected = JSON.parse(this.props.guessSelected);
+        this.guessSelected = ParseProps(props, 'guessSelected', true)
 
-    canCollapse = JSON.parse(this.props.canCollapse);
+        this.canCollapse = ParseProps(props, 'canCollapse', true)
 
-    defaultSelectedKeys = [];
+        this.defaultSelectedKeys = []
 
-    defaultOpenKeys = [];
+        this.defaultOpenKeys = []
+
+        this.menuRef = React.createRef()
+
+        this.state = {
+            collapsed: (localStorage.getItem('maelstrom::menu_collapsed') || 'n') === 'y',
+        }
+    }
 
     handleResize = () => {
         const offset = this.menuRef.current.offsetTop
@@ -159,9 +166,11 @@ export default class Sidebar extends Component {
     }
 
     markSelectedItems(item, parent = null) {
+        // If the item has been forcefully selected, e.g. PHP has defined it as selected
         if (item.selected) {
             this.defaultSelectedKeys.push(item.id)
 
+            // If it can be collapsed, we can expand he collapser.
             if (item.type === 'collapsible' || item.type === 'submenu') {
                 this.defaultOpenKeys.push(item.id)
             }
@@ -175,6 +184,15 @@ export default class Sidebar extends Component {
             }
         }
 
+        // If we're on a dashboard-like page e.g. the admin root.
+        if (item.url === this.root && window.location.pathname !== item.url) {
+            return
+        }
+
+        // If active state guessing is enabled.
+        // We basically check if the URL provided for the menu item e.g. /admin/users
+        // is within the current URL e.g. /admin/users/edit/1
+        // If it is, we just assume its nested so it's marked as active.
         if (
             this.guessSelected &&
             item.url &&
@@ -191,6 +209,7 @@ export default class Sidebar extends Component {
             }
         }
 
+        // If the item has children, we loop around everything until the nesting is complete.
         if (item.children && Array.isArray(item.children)) {
             item.children.forEach(child => this.markSelectedItems(child, item))
         }

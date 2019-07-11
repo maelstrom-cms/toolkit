@@ -3,6 +3,7 @@
     data-theme="{{ $theme ?? config('maelstrom.theme') }}"
     data-items='@json($items)'
     data-width="{{ $width ?? 210 }}"
+    data-root="{{ config('maelstrom.path') }}"
     data-guess-selected="{{ (isset($guess_selected) && $guess_selected === true) || !isset($guess_selected) ? 'true' : 'false' }}"
     data-can-collapse="{{ (isset($can_collapse) && $can_collapse === true) || !isset($can_collapse) ? 'true' : 'false' }}"
 >
