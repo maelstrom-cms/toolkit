@@ -817,7 +817,7 @@ class Panel
 
         // We only know these ones should really exist,
         // any custom ones you need you can append yourself to extend this function.
-        if (in_array($action, ['show', 'update', 'destroy', 'edit', 'bulk'])) {
+        if (in_array($action, ['show', 'update', 'destroy', 'edit'])) {
             return route($this->routes[$action], $entry ?: $this->getEntry());
         } else {
             return route($this->routes[$action]);
