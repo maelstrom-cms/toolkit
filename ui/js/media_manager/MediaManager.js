@@ -161,7 +161,7 @@ export default class MediaManager extends React.Component {
     renderActions = item => {
         return (
             <>
-                <this.DragHandle />
+                { this.state.attached.length > 1 && <this.DragHandle /> }
                 <Button type="danger" onClick={ () => this.removeMedia(item) }>Remove</Button>
             </>
         )
