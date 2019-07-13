@@ -896,8 +896,8 @@ class Panel
     }
 
     /**
-     * The straight forward getter to return the defined attributes
-     * to append from setWithAttributes();
+     * The straight forward getter to return the defined attributes to append from setWithAttributes();
+     *
      *
      * @return array
      */
@@ -1328,6 +1328,7 @@ class Panel
      * Provides access to some default basic bulk actions.
      *
      * @return bool|string
+     * @throws Exception
      */
     public function handleBulkActions(): string
     {
