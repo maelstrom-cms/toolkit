@@ -16,6 +16,7 @@ use Illuminate\Routing\Router;
 use Illuminate\Http\UploadedFile;
 use Intervention\Image\Constraint;
 use Illuminate\Routing\Redirector;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Schema;
@@ -1307,12 +1308,29 @@ class Panel
                     $method->associate($ids);
                     break;
                 case 'BelongsToMany':
-                case 'HasMany':
-                case 'HasManyThrough':
                 case 'MorphMany':
                 case 'MorphToMany':
                 case 'MorphedByMany':
                     $method->sync($ids);
+                    break;
+                case 'HasMany':
+                case 'HasManyThrough':
+                    $items_to_associate = Arr::wrap($ids);
+
+                    // We were trying to unlink existing associations before providing new ones.
+                    try {
+                        DB::transaction(function () use ($method) {
+                            $method->update([$method->getForeignKeyName() => null]);
+                        });
+                    } catch (Exception $e) {
+                        // Likely the field is not nullable so will need to be manually associated to something else.
+                        logger()->warning($e->getMessage(), [$items_to_associate, $this->getEntry(), $method]);
+                    }
+
+                    if (!empty($items_to_associate)) {
+                        $update = [$method->getForeignKeyName() => $method->getParent()->getKey()];
+                        $method->getRelated()->newQuery()->whereIn($method->getForeignKeyName(), $items_to_associate)->update($update);
+                    }
                     break;
                 default:
                     dd('Unsupported relationship: ' . $type . ' on ' . get_class($this->getEntry()));
