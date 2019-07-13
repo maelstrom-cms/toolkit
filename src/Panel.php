@@ -1090,7 +1090,7 @@ class Panel
             // table view to create a clickable item name which takes
             // you to the edit screen.
             if (!$entry->getAttribute('panelRoutes')) {
-                $entry->setAttribute('panelRoutes', $this->getRoutes($entry));
+                $entry->setAttribute('panelRoutes', ['edit' => $this->getRoute('edit', $entry)]);
             }
 
             // We append any attributes that are needed for serialisation.
