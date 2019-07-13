@@ -1095,7 +1095,11 @@ class Panel
 
             // We append any attributes that are needed for serialisation.
             foreach ($this->getWithAttributes() as $attribute) {
-                $entry->append($attribute);
+                if (Str::contains($attribute, '.')) {
+                    $entry->setAttribute($attribute, data_get($entry, $attribute));
+                } else {
+                    $entry->append($attribute);
+                }
             }
 
             // Here we apply the transformation if you actually supplied one.
