@@ -179,7 +179,7 @@ export default class Repeater extends Component {
         return (
             <div>
                 <Form.Item
-                    label={ <span className="font-bold">{ this.props.label }</span> }
+                    label={ this.props.label }
                 >
                     <div className="repeatable-header">
                         { this.renderTopControls() }
