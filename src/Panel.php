@@ -1285,12 +1285,7 @@ class Panel
     public function handleRelationships(): Panel
     {
         foreach ($this->getRelationships() as $field => $relationshipName) {
-
-            // If the relationship isn't present on the request, just skip over this
-            // iteration of the loop.
-            if (!$ids = $this->request->get($field)) {
-                continue;
-            }
+            $ids = $this->request->get($field);
 
             if (!method_exists($this->getEntry(), $relationshipName)) {
                 dd('The relationship: ' . $relationshipName . ' does not exist on ' . get_class($this->getEntry()));
@@ -1321,8 +1316,8 @@ class Panel
                 case 'HasManyThrough':
                     $items_to_associate = Arr::wrap($ids);
 
-                    // We were trying to unlink existing associations before providing new ones.
                     try {
+                        // We were trying to unlink existing associations before providing new ones.
                         DB::transaction(function () use ($method) {
                             $method->update([$method->getForeignKeyName() => null]);
                         });
@@ -1332,8 +1327,12 @@ class Panel
                     }
 
                     if (!empty($items_to_associate)) {
-                        $update = [$method->getForeignKeyName() => $method->getParent()->getKey()];
-                        $method->getRelated()->newQuery()->whereIn($method->getForeignKeyName(), $items_to_associate)->update($update);
+                        $method->getRelated()
+                            ->newQuery()
+                            ->whereIn($method->getRelated()->getKeyName(), $items_to_associate)
+                            ->update([
+                                $method->getForeignKeyName() => $method->getParent()->getKey()
+                            ]);
                     }
                     break;
                 default:
@@ -1449,7 +1448,12 @@ class Panel
         }
 
         /* @var $files FileBag */
-        foreach ($this->getUploadables() as $field => $config) {
+        foreach ($this->getUploadables() as $field => $_config) {
+            $config = array_merge([
+                'path' => '',
+                'disk' => 'public',
+            ], $_config);
+
             // Only do this if the field is populated with something
             if ($uploads = $this->request->files->get($field, null)) {
                 // If we've got an array of files from a multi-uploader, it's more work.
