@@ -142,26 +142,28 @@ export default class Sidebar extends Component {
     }
 
     renderSomething(item, key) {
+        item.id = item.id || item.label
+
         switch ((item.type || 'link').toLowerCase()) {
-        case 'link':
-            return this.renderMenuItem(item)
-        case 'group':
-            return this.renderMenuGroup(item)
-        case 'submenu':
-        case 'collapsible':
-            return this.renderSubMenu(item)
-        case 'html':
-            return this.renderHTML(item)
-        case 'divider':
-            return this.renderMenuDivider(item)
-        case 'custom':
-            return this.renderCustomComponent(item, key)
-        default:
-            return (
-                <Menu.Item key={ key } title="Error">
-                    { 'Sidebar item type not recognised: ' + item.type }
-                </Menu.Item>
-            )
+            case 'link':
+                return this.renderMenuItem(item)
+            case 'group':
+                return this.renderMenuGroup(item)
+            case 'submenu':
+            case 'collapsible':
+                return this.renderSubMenu(item)
+            case 'html':
+                return this.renderHTML(item)
+            case 'divider':
+                return this.renderMenuDivider(item)
+            case 'custom':
+                return this.renderCustomComponent(item, key)
+            default:
+                return (
+                    <Menu.Item key={ key } title="Error">
+                        { 'Sidebar item type not recognised: ' + item.type }
+                    </Menu.Item>
+                )
         }
     }
 
