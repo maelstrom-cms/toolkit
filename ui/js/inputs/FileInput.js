@@ -17,9 +17,11 @@ export default class FileInput extends Component {
 
         this.button = ParseProps(props, 'button', 'Select file')
 
+        this.thumbnail = ParseProps(props, 'thumbnail', null)
+
         this.state = {
             dirty: false,
-            value: props.value,
+            value: this.thumbnail || props.value,
             file: null,
         }
     }

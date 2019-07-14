@@ -4,6 +4,7 @@
     id="{{ $name }}_field"
     data-component="ImageInput"
     data-value="{{ old($name, data_get($entry, $name, ($default ?? null))) }}"
+    data-thumbnail="{{ data_get($entry, ($thumbnail ?? $name), null) }}"
     data-label="{{ $label ?? $name }}"
     data-name="{{ $name }}"
     data-help="{{ $help ?? null }}"
