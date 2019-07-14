@@ -1,6 +1,6 @@
-<form action="{{ $action }}" method="post" enctype="multipart/form-data" autocomplete="off">
+<form method="POST" action="{{ $action }}" enctype="multipart/form-data" autocomplete="{{ $autocomplete ?? 'off' }} {{ isset($novalidate) ? 'novalidate' : '' }}">
     @csrf
-    @method($method)
+    @method(strtoupper($method))
 
     {{ $slot }}
 

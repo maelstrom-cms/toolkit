@@ -11,8 +11,6 @@ export default class TagsInput extends SelectInput {
 
         this.createButton = false
 
-        this.originalValue = ParseProps(props, 'value', [])
-
         this.wildOptions = ParseProps(props, 'allow_wild_values', false)
 
         this.saveLabels = ParseProps(props, 'save_labels', false)
@@ -24,6 +22,18 @@ export default class TagsInput extends SelectInput {
         if (!value) {
             return []
         }
+
+        value = value.map(v => {
+            let field = v;
+
+            if (v.key) {
+                field = v.key
+            } else if (v.id) {
+                field = v.id
+            }
+
+            return `${field}`
+        })
 
         value = this.state.options.filter(o => value.indexOf(`${o.key}`) !== -1)
 

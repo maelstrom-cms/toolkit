@@ -164,7 +164,7 @@ export default class ColourInput extends Component {
                 label={ this.props.label }
                 validateStatus={ this.props.error ? 'error' : null }
                 help={ this.props.error || this.props.help }
-                required={ JSON.parse(this.props.required) }
+                required={ this.required }
             >
                 { !this.props.onChange && <input value={ this.state.value } type="hidden" name={ this.props.name } /> }
                 { this.renderThumb() }
