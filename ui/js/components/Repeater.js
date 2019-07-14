@@ -19,9 +19,9 @@ export default class Repeater extends Component {
 
         this.components = ParseProps(props, 'components', []).map(config => {
             config.key = config.name
-            config.options = ParseProps(config, 'options', [])
+            config.options = ParseProps(config, 'options', undefined)
             config.required = config.required || false
-            config.label = config.label || name
+            config.label = config.label || config.name
             config.help = config.help || null
             config.error = config.error || null
 
@@ -132,15 +132,14 @@ export default class Repeater extends Component {
             props.onChange = v => {
                 return this.onChange(props.name, index, v)
             }
-
+            
             if (typeof value[props.name] === 'object') {
                 props.value = JSON.stringify(value[props.name])
             } else {
-                props.value = value[props.name]
-                props.defaultValue = value[props.name]
+                props.value = value[props.name] || props.default
             }
 
-            return <div data-field={ props.name } key={ props.key }> { React.createElement(Registry.resolve(props.component), props) }</div>
+            return <div data-field={ props.name } key={ props.key }> { React.createElement(Registry.resolve(props.component || 'TextInput'), props) }</div>
         })
     };
 

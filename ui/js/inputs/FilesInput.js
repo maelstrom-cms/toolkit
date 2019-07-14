@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Form, Upload, Button, Icon } from 'antd'
+import { Form, Upload, Button, Icon, Alert } from 'antd'
 import ParseProps from '../support/ParseProps'
 
 const hash = function (string) {
@@ -162,6 +162,10 @@ export default class FilesInput extends Component {
     };
 
     renderUploader = () => {
+        if (this.props.onChange) {
+            return <Alert showIcon={ true } type="error" message="Input not supported inside a repeater." />
+        }
+
         return (
             <Upload
                 beforeUpload={ this.attachFile }

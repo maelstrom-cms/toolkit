@@ -24,7 +24,7 @@
 
 .ant-form-explain,
 .ant-form-extra {
-    margin-top: 5px;
+    padding: 10px 0;
 }
 
 .ant-form-item-children .react-mde .grip .icon {
@@ -85,14 +85,6 @@
     border-radius: 0
 }
 
-.ant-form-item-children .ant-transfer-list-with-footer:last-child {
-    padding-bottom: 0;
-}
-
-.ant-form-item-children .ant-transfer-list-with-footer:last-child .ant-transfer-list-footer {
-    display: none;
-}
-
 .ant-input-suffix .ant-input-clear-icon {
     transform: translateY(1px)
 }
@@ -123,6 +115,18 @@
     transform: translateY(9px)
 }
 
+.ant-form-item-children .ant-transfer-list-footer {
+    background: #fff;
+}
+
+.ant-form-item-children .ant-transfer-list-with-footer:last-child {
+    padding-bottom: 0;
+}
+
+.ant-form-item-children .ant-transfer-list-with-footer:last-child .ant-transfer-list-footer {
+    display: none;
+}
+
 .ant-upload-list-item {
     margin-top: 8px;
     margin-bottom: 5px
@@ -130,6 +134,17 @@
 
 .ant-upload-list-text {
     max-width: 700px
+}
+
+.ant-calendar-header .ant-calendar-prev-century-btn,
+.ant-calendar-header .ant-calendar-next-century-btn,
+.ant-calendar-header .ant-calendar-prev-decade-btn,
+.ant-calendar-header .ant-calendar-next-decade-btn,
+.ant-calendar-header .ant-calendar-prev-month-btn,
+.ant-calendar-header .ant-calendar-next-month-btn,
+.ant-calendar-header .ant-calendar-prev-year-btn,
+.ant-calendar-header .ant-calendar-next-year-btn {
+    padding-top: 18px;
 }
 
 .border {

@@ -9,10 +9,14 @@ export default class CheckboxInput extends Component {
 
         this.required = ParseProps(props, 'required', false)
 
-        this.options = ParseProps(props, 'options', [
-            { label: 'Yes', value: '1' },
-            { label: 'No', value: '0' },
-        ])
+        this.options = ParseProps(props, 'options', [])
+
+        if (typeof props.options === 'undefined') {
+            this.options = [
+                { label: 'Yes', value: '1' },
+                { label: 'No', value: '0' },
+            ]
+        }
 
         this.state = {
             value: ParseProps(props, 'value', []),

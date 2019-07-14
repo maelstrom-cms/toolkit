@@ -52,10 +52,6 @@ export default class RandomInput extends TextInput {
     }
 
     renderSuffix = () => {
-        return (
-            <button tabIndex="-1" type="button" className="block border-0 appearance-none p-0 m-0 cursor-pointer outline-none hover:outline-none" onClick={ this.onClick }>
-                <Icon type="sync" spin={ this.state.spin }  />
-            </button>
-        )
+        return <Icon role="button" className="cursor-pointer text-gray-600 hover:text-gray-900" onClick={ this.onClick } type="sync" spin={ this.state.spin }  />
     }
 }
