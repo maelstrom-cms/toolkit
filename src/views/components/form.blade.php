@@ -1,4 +1,4 @@
-<form method="POST" action="{{ $action }}" enctype="multipart/form-data" autocomplete="{{ $autocomplete ?? 'off' }} {{ isset($novalidate) ? 'novalidate' : '' }}">
+<form class="maelstrom-form" method="POST" action="{{ $action }}" enctype="multipart/form-data" autocomplete="{{ $autocomplete ?? 'off' }} {{ isset($novalidate) ? 'novalidate' : '' }}">
     @csrf
     @method(strtoupper($method))
 
