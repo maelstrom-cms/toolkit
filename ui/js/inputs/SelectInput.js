@@ -33,7 +33,7 @@ export default class SelectInput extends Component {
         }
     }
 
-    async componentWillMount() {
+    async UNSAFE_componentWillMount() {
         document.addEventListener('refresh-data', this.fetchRemoteData)
 
         await this.fetchRemoteData()

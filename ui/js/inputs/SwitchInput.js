@@ -25,7 +25,7 @@ export default class SwitchInput extends Component {
         }
     }
 
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
         FieldVisibilityHandler((this.state.value === this.onValue), this.toggleConfiguration)
     }
 

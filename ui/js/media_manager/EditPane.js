@@ -35,7 +35,7 @@ export default class EditPane extends React.Component {
         }
     }
 
-    componentWillReceiveProps(props) {
+    UNSAFE_componentWillReceiveProps(props) {
         if (props.active.id !== this.state.id) {
             this.setState({
                 busy: false,

@@ -33,7 +33,7 @@ export default class Repeater extends Component {
         }
     }
 
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
         if (this.state.value.length === 0 && this.minItems >= 1) {
             this.addItem(0)
         }

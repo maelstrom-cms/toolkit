@@ -26,7 +26,7 @@ export default class Tabs extends Component {
 
     direction = this.props.direction === 'horizontal' ? 'top' : 'left';
 
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
         // If a field has errors, make one of these the active tabs.
         this.activeTabFromErrors()
 

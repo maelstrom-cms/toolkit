@@ -23,7 +23,7 @@ export default class TransferInput extends Component {
         }
     }
 
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
         document.addEventListener('refresh-data', this.fetchRemoteData)
 
         this.fetchRemoteData()

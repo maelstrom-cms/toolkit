@@ -47,7 +47,7 @@ export default class Sidebar extends Component {
         })
     };
 
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
         this.handleResize = debounce(this.handleResize, 200)
 
         window.addEventListener('resize', this.handleResize)

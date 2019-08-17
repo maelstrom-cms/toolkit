@@ -17,7 +17,7 @@ export default class VideoColumn extends Component {
         return { ...defaultStyle, ...this.props.style }
     }
 
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
         try {
             if (typeof this.props.text === 'string') {
                 this.oembed = JSON.parse(this.props.text)
