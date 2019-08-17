@@ -26,7 +26,6 @@ export default class EntryTable extends Component {
         this.columns = ParseProps(props, 'columns', []).map(column => {
             column.filteredValue = (this.filter[column.dataIndex] || column.filteredValue)
             column.sortOrder = (this.sort.column === column.dataIndex ? this.sort.direction : column.sortOrder)
-            column.dataIndex = column.dataIndex || <div>no dataIndex provided</div>
 
             if (column.name && !column.dataIndex) {
                 column.dataIndex = column.name
