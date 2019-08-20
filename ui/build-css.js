@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const fs = require('fs')
 const postcss = require('postcss')
 const clean = require('postcss-clean')

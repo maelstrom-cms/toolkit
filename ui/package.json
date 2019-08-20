@@ -1,6 +1,6 @@
 {
   "name": "@maelstrom-cms/toolkit",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "description": "UI counterpart for Maelstrom CMS Toolkit for Laravel",
   "main": "js/maelstrom.js",
   "repository": {
@@ -20,7 +20,7 @@
     "@babel/plugin-proposal-class-properties": "^7.4",
     "@babel/preset-react": "^7.0",
     "algolia-places-react": "^1.4",
-    "antd": "^3.20",
+    "antd": "^3.22",
     "array-move": "^2.1",
     "autoprefixer": "^9.6",
     "babel-eslint": "^10.0",
@@ -64,5 +64,8 @@
   "scripts": {
     "test": "jest",
     "test:watch": "jest --watch"
+  },
+  "bin": {
+    "tailstrom": "./build-css.js"
   }
 }
