@@ -1,6 +1,6 @@
 {
   "name": "@maelstrom-cms/toolkit",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "description": "UI counterpart for Maelstrom CMS Toolkit for Laravel",
   "main": "js/maelstrom.js",
   "repository": {

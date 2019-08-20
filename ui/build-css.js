@@ -22,7 +22,7 @@ const argv = require('yargs')
         describe: 'enable/disable minification',
     }).argv
 
-const inputFile = 'Maelstrom/ui/css/maelstrom.css'
+const inputFile = __dirname + '/css/maelstrom.css'
 const outputFile = argv.o || 'public/css/maelstrom.css'
 const tailwindConfig = argv.c || require('tailwindcss/defaultConfig')
 const shouldMinify = argv.minify ? (argv.minify === 'true') : true
@@ -39,10 +39,14 @@ fs.readFile(inputFile, (err, css) => {
             to: outputFile,
         })
         .then(result => {
-            fs.writeFile(outputFile, result.css, () => true)
+            fs.writeFile(outputFile, result.css, () => {
+                console.log('Compiled into: ' + outputFile)
+                shouldMinify && console.log(outputFile + ' has been minified.');
+            })
 
             if (result.map) {
                 fs.writeFile(outputFile + '.map', result.map, () => true)
+                console.log('Source map written to: ' + outputFile + '.map')
             }
         })
         .catch(console.log)
