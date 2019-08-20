@@ -1,6 +1,7 @@
 <html lang="en">
 <head>
     <title>@yield('title') :: {{ config('maelstrom.title_prefix', config('maelstrom.title')) }}</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     @include('maelstrom::partials.head-meta')
 </head>
 <body>
