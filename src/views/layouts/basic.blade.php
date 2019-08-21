@@ -22,7 +22,7 @@
 
     @include('maelstrom::components.validation')
 
-    <div class="form mt-4 cloak">
+    <div class="mt-4 cloak">
         @yield('content')
     </div>
 
