@@ -51,7 +51,7 @@ class MediaController extends Controller
             return abort(404);
         }
 
-        $this->middleware(config('maelstrom.media_manager.guard'));
+        $this->middleware(config('maelstrom.media_manager.middleware'));
 
         $this->disk = config('maelstrom.media_manager.disk');
         $this->mimeTypes = config('maelstrom.media_manager.mime_types');
