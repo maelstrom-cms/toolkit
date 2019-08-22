@@ -32,10 +32,10 @@ class EditAccountController extends Controller
             return abort(404);
         }
 
-        $this->middleware(config('maelstrom.auth.guard'));
+        $this->middleware(config('maelstrom.auth.middleware'));
 
         $this->middleware(function ($request, $next) {
-            $this->user = auth()->user();
+            $this->user = auth(config('maelstrom.auth.guard'))->user();
             $this->panel = maelstrom(config('maelstrom.auth.model'));
             $this->panel->setEntry($this->user);
 

@@ -35,7 +35,7 @@ class FormOptionsController extends Controller
             return abort(404);
         }
 
-        $this->middleware(config('maelstrom.form_options.guard'));
+        $this->middleware(config('maelstrom.form_options.middleware'));
         $this->types = config('maelstrom.form_options.models');
     }
 
