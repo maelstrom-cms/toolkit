@@ -1288,7 +1288,7 @@ class Panel
             $ids = $this->request->get($field);
 
             if (!method_exists($this->getEntry(), $relationshipName)) {
-                dd('The relationship: ' . $relationshipName . ' does not exist on ' . get_class($this->getEntry()));
+                dd('The relationship: ' . $relationshipName . ' does not exist on ' . get_class($this->query->getModel()));
             }
 
             /* @var $method BelongsToMany | BelongsTo */
@@ -1301,9 +1301,27 @@ class Panel
             // over time this list might need adjusting!
             switch ($type) {
                 case 'HasOne':
-                case 'BelongsTo':
                 case 'MorphOne':
                 case 'HasOneThrough':
+                    // Find all the props that start with the prefix e.g.
+                    // prefix = "meta_" then it will find "meta_title".
+                    $data = array_filter($this->request->all(), function ($property) use ($field) {
+                        return Str::startsWith($property, $field);
+                    }, ARRAY_FILTER_USE_KEY);
+
+                    // Just removing the "meta_" prefix so it goes into the related model.
+                    array_map(function ($value, $property) use (&$data, $field) {
+                        unset($data[$property]);
+                        $property = str_replace($field, '', $property);
+                        $data[$property] = $value;
+                    }, $data, array_keys($data));
+
+                    $relation = $method->first() ?: $method->getRelated();
+                    $relation->fill($data);
+
+                    $method->save($relation);
+                    break;
+                case 'BelongsTo':
                     $method->associate($ids);
                     break;
                 case 'BelongsToMany':
@@ -1649,6 +1667,7 @@ class Panel
     public function store(string $successMessage = null): Model
     {
         $entry = $this->query->getModel();
+        $this->setEntry($entry);
 
         // If you want to customise what data is saved
         // directly to this model, you can create a custom Panel
@@ -1656,6 +1675,8 @@ class Panel
         $entry->fill(
             $this->getFillableData()
         );
+
+        $entry->save();
 
         $this->handleRelationships();
 
@@ -1669,8 +1690,6 @@ class Panel
                 'message' => $successMessage,
             ]);
         }
-
-        $this->setEntry($entry);
 
         return $this->getEntry();
     }
@@ -1707,8 +1726,6 @@ class Panel
     {
         $entry = $this->getEntry();
 
-        $this->handleUploadables();
-
         // If you want to customise what data is saved
         // directly to this model, you can create a custom Panel
         // which extends this, and just overwrite the getFillableData() method.
@@ -1717,6 +1734,8 @@ class Panel
         );
 
         $this->handleRelationships();
+
+        $this->handleUploadables();
 
         $entry->save();
 
