@@ -13,7 +13,7 @@
     data-step="{{ $step ?? 1 }}"
     data-dots="{{ bool_to_string($dots ?? false) }}"
     data-marks='@json($marks ?? [], JSON_FORCE_OBJECT)'
-    data-error="{{ $errors->first($name) }}"
+    data-error="{{ $errors->first(str_replace('.', '_', $name)) }}"
     data-show-input="{{ bool_to_string($show_input ?? false) }}"
     data-prefix-icon="{{ $prefix_icon ?? null }}"
     data-suffix-icon="{{ $suffix_icon ?? null }}"

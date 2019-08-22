@@ -31,7 +31,7 @@
     data-label="{{ $label ?? $name }}"
     data-name="{{ $name }}"
     data-help="{{ $help ?? null }}"
-    data-error="{{ $errors->first($name) }}"
+    data-error="{{ $errors->first(str_replace('.', '_', $name)) }}"
     data-options='@json($options)'
     data-required="{{ bool_to_string($required ?? false) }}"
     data-remote-uri="{{ $remote_uri ?? null }}"

@@ -8,7 +8,7 @@
     data-name="{{ $name }}"
     data-help="{{ $help ?? null }}"
     data-autocomplete="{{ $autocomplete ?? null }}"
-    data-error="{{ $errors->first($name) }}"
+    data-error="{{ $errors->first(str_replace('.', '_', $name)) }}"
     data-required="{{ bool_to_string($required ?? false) }}"
     data-allow-clear="{{ bool_to_string($allow_clear ?? false) }}"
 

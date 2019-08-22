@@ -11,6 +11,6 @@
     data-max="{{ $max ?? 100000 }}"
     data-precision="{{ $precision ?? 0 }}"
     data-step="{{ $step ?? 1 }}"
-    data-error="{{ $errors->first($name) }}"
+    data-error="{{ $errors->first(str_replace('.', '_', $name)) }}"
     data-required="{{ bool_to_string($required ?? false) }}"
 ></div>

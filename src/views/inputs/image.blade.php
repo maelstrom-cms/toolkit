@@ -8,7 +8,7 @@
     data-label="{{ $label ?? $name }}"
     data-name="{{ $name }}"
     data-help="{{ $help ?? null }}"
-    data-error="{{ $errors->first($name) }}"
+    data-error="{{ $errors->first(str_replace('.', '_', $name)) }}"
     data-required="{{ bool_to_string($required ?? false) }}"
     data-icon="{{ $icon ?? 'file-image' }}"
     data-button="{{ $button ?? 'Select image' }}"
