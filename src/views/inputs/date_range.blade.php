@@ -9,7 +9,7 @@
     data-name-start="{{ $name_start }}"
     data-name-end="{{ $name_end }}"
     data-help="{{ $help ?? null }}"
-    data-error="{{ $errors->first($str_replace('.', '_', $name_start)) ?: $errors->first(str_replace('.', '_', $name_end)) }}"
+    data-error="{{ $errors->first(str_replace('.', '_', $name_start)) ?: $errors->first(str_replace('.', '_', $name_end)) }}"
     data-required="{{ bool_to_string($required ?? false) }}"
     data-allow-clear="{{ bool_to_string($allow_clear ?? false) }}"
     data-show-time="{{ bool_to_string($show_time ?? false) }}"
