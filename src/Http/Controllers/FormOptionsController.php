@@ -19,6 +19,9 @@ class FormOptionsController extends Controller
      *        'scopes' => [],
      *        'value' => 'id',
      *        'label' => 'name',
+     *        'allow_none' => true,
+     *        'none_label' => 'None',
+     *        'none_value' => '', // HTML forms don't support NULL so use an empty string which laravel will convert later.
      *      ],
      * ]
      * @var array
@@ -86,12 +89,21 @@ class FormOptionsController extends Controller
             $query->scopes($settings['scopes']);
         }
 
-        // Return all the entries once they've been transformed into a sensible format.
-        return $query->get()->transform(function ($item) use ($settings) {
+        $results = $query->get()->transform(function ($item) use ($settings) {
             return [
                 'value' => data_get($item, $settings['value']),
                 'label' => data_get($item, $settings['label']),
             ];
         })->sortBy('label')->values();
+
+        if (data_get($settings, 'allow_none')) {
+            $results->prepend([
+                'value' => data_get($settings, 'none_value', ''),
+                'label' => data_get($settings, 'none_label', 'None'),
+            ]);
+        }
+
+        // Return all the entries once they've been transformed into a sensible format.
+        return $results;
     }
 }
