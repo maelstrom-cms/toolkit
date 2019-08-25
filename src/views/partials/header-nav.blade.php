@@ -14,9 +14,9 @@
     </div>
     @endif
 
-    @if (Route::has('logout') && auth()->check() && config('maelstrom.auth.enabled'))
+    @if (Route::has('maelstrom.logout') && auth()->check() && config('maelstrom.auth.enabled'))
     <div class="ml-4">
-        <form class="m-0" action="{{ route('logout') }}" method="POST">
+        <form class="m-0" action="{{ route('maelstrom.logout') }}" method="POST">
             @csrf
             <button type="submit" class="ant-btn ant-btn-dashed ant-btn-sm">
                 Logout

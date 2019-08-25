@@ -17,6 +17,10 @@ export default class TextInput extends Component {
 
         this.autoComplete = ParseProps(props, 'autocomplete', 'off')
 
+        this.readOnly = ParseProps(props, 'readonly', false);
+
+        this.disabled = ParseProps(props, 'disabled', false);
+
         this.state = {
             value: props.value,
         }
@@ -89,6 +93,8 @@ export default class TextInput extends Component {
             value={ this.state.value }
             onChange={ onChange }
             autoComplete={ this.autoComplete }
+            disabled={ this.disabled }
+            readOnly={ this.readOnly }
         />
     };
 
@@ -97,6 +103,8 @@ export default class TextInput extends Component {
             autosize={ this.autoSize }
             value={ this.state.value }
             onChange={ onChange }
+            disabled={ this.disabled }
+            readOnly={ this.readOnly }
         />
     };
 
