@@ -14,7 +14,7 @@ export default class TextLinkColumn extends Component {
 
     renderIcon() {
         if (this.props.icon) {
-            return <Icon style={{ transform: 'translateY(-1px)', fontSize: 13, marginLeft: 10 }} type={ this.props.icon } />
+            return <Icon style={{ fontSize: 13, marginLeft: 10 }} type={ this.props.icon } />
         }
 
         return null

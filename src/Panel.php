@@ -1650,6 +1650,7 @@ class Panel
         return view($view, [
             'action' => $formAction ?: $this->getRoute('store'),
             'method' => 'POST',
+            'entry' => null,
         ]);
     }
 
@@ -1708,6 +1709,7 @@ class Panel
         return view($view, [
             'action' => $formAction ?: $this->getRoute('update'),
             'method' => 'PUT',
+            'entry' => $this->getEntry(),
         ]);
     }
 

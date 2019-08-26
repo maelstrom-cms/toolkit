@@ -1,3 +1,4 @@
+import URI from 'urijs'
 import React, { Component } from 'react'
 import { Menu, Icon } from 'antd'
 import debounce from 'lodash/debounce'
@@ -168,6 +169,8 @@ export default class Sidebar extends Component {
     }
 
     markSelectedItems(item, parent = null) {
+        const itemUrl = item.url ? new URI(item.url).path() : undefined;
+
         // If the item has been forcefully selected, e.g. PHP has defined it as selected
         if (item.selected) {
             this.defaultSelectedKeys.push(item.id)
@@ -187,7 +190,7 @@ export default class Sidebar extends Component {
         }
 
         // If we're on a dashboard-like page e.g. the admin root.
-        if (item.url === this.root && window.location.pathname !== item.url) {
+        if (itemUrl === this.root && (new URI).path() !== item.url) {
             return
         }
 
@@ -197,11 +200,10 @@ export default class Sidebar extends Component {
         // If it is, we just assume its nested so it's marked as active.
         if (
             this.guessSelected &&
-            item.url &&
+            itemUrl &&
             item.selected !== false &&
-            window.location.toString().indexOf(item.url) !== -1
+            window.location.toString().indexOf(itemUrl) !== -1
         ) {
-
             if (this.defaultSelectedKeys.indexOf(item.id) === -1) {
                 this.defaultSelectedKeys.push(item.id)
             }
