@@ -24,12 +24,12 @@ export default class EntryTable extends Component {
         this.mediaRoute = props.mediaRoute
 
         this.columns = ParseProps(props, 'columns', []).map(column => {
-            column.filteredValue = (this.filter[column.dataIndex] || column.filteredValue)
-            column.sortOrder = (this.sort.column === column.dataIndex ? this.sort.direction : column.sortOrder)
-
             if (column.name && !column.dataIndex) {
                 column.dataIndex = column.name
             }
+
+            column.filteredValue = (this.filter[column.dataIndex] || column.filteredValue)
+            column.sortOrder = (this.sort.column === column.dataIndex ? this.sort.direction : column.sortOrder)
 
             if (column.label && !column.title) {
                 column.title = column.label
