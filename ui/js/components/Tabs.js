@@ -5,6 +5,11 @@ import URI from 'urijs'
 
 window.URI = URI
 
+function hasParentClass(element, classname) {
+    if ((element.className || '').split(' ').indexOf(classname)>=0) return true;
+    return element.parentNode && hasParentClass(element.parentNode, classname);
+}
+
 export default class Tabs extends Component {
 
     state = {
@@ -81,6 +86,16 @@ export default class Tabs extends Component {
         })
 
         tab.active = true
+
+        const formControls = document.querySelector('[data-component="FormControls"]');
+
+        if (formControls) {
+            if (hasParentClass(tab.element, 'maelstrom-form')) {
+                formControls.classList.remove('hidden')
+            } else {
+                formControls.classList.add('hidden')
+            }
+        }
 
         window.requestAnimationFrame(() => {
             tab.element.classList.remove('hidden')
