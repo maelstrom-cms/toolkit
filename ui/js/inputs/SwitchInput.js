@@ -75,7 +75,7 @@ export default class SwitchInput extends Component {
                 checkedChildren={ this.renderChecked() }
                 unCheckedChildren={ this.renderUnchecked() }
                 defaultChecked={ this.state.value === this.onValue }
-                value={ this.state.value }
+                checked={ this.state.value === this.onValue }
                 onChange={ this.onChange }
             />
         )
