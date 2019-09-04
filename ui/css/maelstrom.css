@@ -77,10 +77,6 @@
     line-height: initial;
 }
 
-.ant-input-affix-wrapper .ant-input:not(:last-child) {
-    /* padding-right: 54px; */
-}
-
 .ant-input-affix-wrapper .ant-input {
     min-height: 22px;
 }
@@ -91,10 +87,6 @@
 
 .ant-input-suffix .ant-input-clear-icon {
     transform: translateY(1px);
-}
-
-.ant-menu-root li:first-child {
-    /* margin-top: 25px; */
 }
 
 .ant-menu-root {
