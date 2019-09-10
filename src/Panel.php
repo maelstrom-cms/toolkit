@@ -329,7 +329,7 @@ class Panel
     {
         $this->perPage = (int)$this->request->get('per_page', $this->perPage);
         $this->search = $this->request->has('search') ? json_decode($this->request->get('search')) : null;
-        $this->sort = $this->request->has('sort') ? json_decode($this->request->get('sort')) : null;
+        $this->sort = $this->request->has('sort') ? json_decode($this->request->get('sort')) : $this->getDefaultSorting();
         $this->filters = $this->request->has('filters') ? json_decode($this->request->get('filters')) : null;
         $this->inTrash = $this->request->has('in_trash');
 
@@ -651,6 +651,21 @@ class Panel
     }
 
     /**
+     * Allows you to set the default sorting direction for a panel.
+     *
+     * @param string $column
+     * @param string $direction
+     * @return Panel
+     */
+    public function setDefaultSorting(string $column, string $direction = 'asc'): Panel
+    {
+        $this->defaultSortColumn = $column;
+        $this->defaultSortDirection = $direction;
+
+        return $this;
+    }
+
+    /**
      * Allows you to explicitly define the name of the entity you're using.
      * You should always provide the singular version e.g. "Page" NOT "Pages"
      *
@@ -680,6 +695,20 @@ class Panel
         $this->tableHeadings = $tableHeadings;
 
         return $this;
+    }
+
+    /**
+     * Allows you to set a default column sort order, this will execute
+     * when there is no "sort" query string active.
+     *
+     * @return object
+     */
+    public function getDefaultSorting()
+    {
+        return (object) [
+            'column' => $this->defaultSortColumn,
+            'direction' => strtolower($this->defaultSortDirection) === 'asc' ? 'ascend' : 'descend',
+        ];
     }
 
     /**
