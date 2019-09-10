@@ -1,7 +1,7 @@
 @php
     $entry = $entry ?? maelstrom()->getEntry();
     $options = $options ?? [['label' => 'Yes', 'value' => '1'], ['label' => 'No', 'value' => '0']];
-    $value = old($name, data_get($entry, $name, ($default ?? null)));
+    $value = old(str_replace('.', '_', $name), data_get($entry, $name, ($default ?? null)));
 
     if (is_object($value) || is_array($value)) {
         $value = json_encode($value);

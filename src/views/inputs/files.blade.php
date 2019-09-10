@@ -1,6 +1,6 @@
 @php
     $entry = $entry ?? maelstrom()->getEntry();
-    $value = old($name, data_get($entry, $name, ($default ?? [])));
+    $value = old(str_replace('.', '_', $name), data_get($entry, $name, ($default ?? [])));
 @endphp
 
 <div

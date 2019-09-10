@@ -3,8 +3,8 @@
 <div
     id="{{ $name_start }}_field"
     data-component="DateRangeInput"
-    data-value-start="{{ old($name_start, data_get($entry, $name_start, ($default ?? null))) }}"
-    data-value-end="{{ old($name_end, data_get($entry, $name_end, ($default ?? null))) }}"
+    data-value-start="{{ old(str_replace('.', '_', $name_start), data_get($entry, $name_start, ($default ?? null))) }}"
+    data-value-end="{{ old(str_replace('.', '_', $name_end), data_get($entry, $name_end, ($default ?? null))) }}"
     data-label="{{ $label ?? $name_start }}"
     data-name-start="{{ $name_start }}"
     data-name-end="{{ $name_end }}"

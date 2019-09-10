@@ -1,6 +1,6 @@
 @php
     $entry = $entry ?? maelstrom()->getEntry();
-    $value = old($name, data_get($entry, $name, ($default ?? null)));
+    $value = old(str_replace('.', '_', $name), data_get($entry, $name, ($default ?? null)));
 
     if (is_object($value) && !count(get_object_vars($value))) {
         $value = null;

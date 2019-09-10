@@ -6,7 +6,7 @@
 <div
     id="{{ $name }}_field"
     data-component="CheckboxInput"
-    data-value='{!! json_encode(old($name, data_get($entry, $name, ($default ?? [])))) !!}'
+    data-value='{!! json_encode(old(str_replace('.', '_', $name), data_get($entry, $name, ($default ?? [])))) !!}'
     data-label="{{ $label ?? $name }}"
     data-name="{{ $name }}"
     data-help="{{ $help ?? null }}"

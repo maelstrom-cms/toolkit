@@ -5,7 +5,7 @@
     if (old($name . '_is_empty')) {
         $values = [];
     } else {
-        $values = old($name, data_get($entry, $valueField, ($default ?? [])));
+        $values = old(str_replace('.', '_', $name), data_get($entry, $valueField, ($default ?? [])));
     }
 
     if (is_iterable($values)) {

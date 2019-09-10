@@ -15,7 +15,7 @@
         return $item;
     }, $fields ?? []);
 
-    $value = old($name, data_get($entry, $name, ($default ?? [])));
+    $value = old(str_replace('.', '_', $name), data_get($entry, $name, ($default ?? [])));
 
     $value = array_map(function ($item) {
         if (data_get($item, '_key', null) === null) {

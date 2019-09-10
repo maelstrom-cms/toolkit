@@ -3,7 +3,7 @@
 <div
     id="{{ $name }}_field"
     data-component="RatingInput"
-    data-value="{{ old($name, data_get($entry, $name, ($default ?? 0))) }}"
+    data-value="{{ old(str_replace('.', '_', $name), data_get($entry, $name, ($default ?? 0))) }}"
     data-label="{{ $label ?? $name }}"
     data-name="{{ $name }}"
     data-help="{{ $help ?? null }}"
