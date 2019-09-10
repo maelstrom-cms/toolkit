@@ -112,6 +112,21 @@ class Panel
     public $sort = null;
 
     /**
+     * When no sort order is defined via the query string, you can fall back to a default
+     * sorting, which is defined by ->setDefaultSorting('name', 'desc')
+     *
+     * @var string|null
+     */
+    public $defaultSortColumn = null;
+
+    /**
+     * Sets the direction of ordering when using ->setDefaultSorting();
+     *
+     * @var string
+     */
+    public $defaultSortDirection = 'ASC';
+
+    /**
      * If this is set to true - the queries get scoped
      * to only showing the items in the trash. Normally only used
      * when the model uses the SoftDeletes trait.
@@ -329,7 +344,7 @@ class Panel
     {
         $this->perPage = (int)$this->request->get('per_page', $this->perPage);
         $this->search = $this->request->has('search') ? json_decode($this->request->get('search')) : null;
-        $this->sort = $this->request->has('sort') ? json_decode($this->request->get('sort')) : $this->getDefaultSorting();
+        $this->sort = $this->request->has('sort') ? json_decode($this->request->get('sort')) : null;
         $this->filters = $this->request->has('filters') ? json_decode($this->request->get('filters')) : null;
         $this->inTrash = $this->request->has('in_trash');
 
@@ -660,7 +675,7 @@ class Panel
     public function setDefaultSorting(string $column, string $direction = 'asc'): Panel
     {
         $this->defaultSortColumn = $column;
-        $this->defaultSortDirection = $direction;
+        $this->defaultSortDirection = strtoupper($direction);
 
         return $this;
     }
@@ -695,20 +710,6 @@ class Panel
         $this->tableHeadings = $tableHeadings;
 
         return $this;
-    }
-
-    /**
-     * Allows you to set a default column sort order, this will execute
-     * when there is no "sort" query string active.
-     *
-     * @return object
-     */
-    public function getDefaultSorting()
-    {
-        return (object) [
-            'column' => $this->defaultSortColumn,
-            'direction' => strtolower($this->defaultSortDirection) === 'asc' ? 'ascend' : 'descend',
-        ];
     }
 
     /**
@@ -1186,6 +1187,8 @@ class Panel
             // We also manually mutate the sorting to make sure we don't pass
             // user submitted data into the query.
             $this->query->orderBy($this->sort->column, ($this->sort->direction === 'ascend' ? 'ASC' : 'DESC'));
+        } elseif ($this->defaultSortColumn) {
+            $this->query->orderBy($this->defaultSortColumn, $this->defaultSortDirection);
         }
 
         return $this;
