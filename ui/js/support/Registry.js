@@ -10,6 +10,11 @@ class Registry {
     register(components) {
         Object.keys(components).forEach(name => {
             const component = components[name]
+            
+            // Only register it once.
+            if (this.items[name]) {
+                return
+            }
 
             this.items[name] = component
 
