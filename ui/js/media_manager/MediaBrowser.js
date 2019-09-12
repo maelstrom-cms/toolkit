@@ -44,20 +44,16 @@ export default class MediaBrowser extends React.Component {
                     </div>
                 </div>
                 <div style={{ height: 'calc(100vh - 250px)' }} className="overflow-y-scroll">
-                    <ReactList
-                        length={ results.length }
-                        type="uniform"
-                        itemRenderer={ key => {
-                            const image = results[key]
-
+                    <div className="flex flex-wrap">
+                        { results.map(image => {
                             return (
                                 <button
                                     data-id={ image.id }
                                     key={ image.id }
                                     onDoubleClick={ () => this.props.attachMedia(image) }
                                     onClick={ () => this.props.setActive(image) }
-                                    style={{ minHeight: 100 }}
-                                    className={ `w-1/6 p-2 text-center appearance-none border-0 cursor-pointer focus:outline-none rounded overflow-hidden ${this.props.active && this.props.active.id === image.id ? 'bg-gray-200' : 'bg-transparent'}` }
+                                    style={{ minHeight: 100, minWidth: 100 }}
+                                    className={ `p-2 text-center appearance-none border-0 cursor-pointer focus:outline-none rounded overflow-hidden ${this.props.active && this.props.active.id === image.id ? 'bg-gray-200' : 'bg-transparent'}` }
                                 >
                                     <Img
                                         alt={ image.name || image.alt }
@@ -69,8 +65,8 @@ export default class MediaBrowser extends React.Component {
                                     />
                                 </button>
                             )
-                        }}
-                    />
+                        })}
+                    </div>
                 </div>
             </>
         )

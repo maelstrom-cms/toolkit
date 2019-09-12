@@ -40,6 +40,20 @@ export default class MediaManager extends React.Component {
         this.mounted = true
 
         this.getItems()
+
+        document.addEventListener('media-updated', ({ detail }) => {
+            if (JSON.stringify(detail) !== JSON.stringify(this.state.items)) {
+                this.setState({
+                    items: detail,
+                }, () => {
+                    this.refreshPreviewList()
+                })
+            }
+        })
+    }
+
+    updateOtherManagersWith = items => {
+        document.dispatchEvent(new CustomEvent('media-updated', { detail: [ ...items ] }))
     }
 
     componentWillUnmount() {
@@ -70,6 +84,8 @@ export default class MediaManager extends React.Component {
         if (!this.mounted) {
             return
         }
+
+        this.updateOtherManagersWith(items);
 
         this.setState({
             items,
@@ -245,7 +261,15 @@ export default class MediaManager extends React.Component {
                     destroyOnClose={ true }
                     afterVisibleChange={ drawerActuallyOpen => this.setState({ drawerActuallyOpen }) }
                 >
-                    { this.state.drawerActuallyOpen && <SplitView { ...this.props } { ...this.state } getItems={ this.getItems } setActive={ this.setActive } removeMedia={ this.removeMedia } attachMedia={ this.attachMedia } /> }
+                    { this.state.drawerActuallyOpen && <SplitView
+                        { ...this.props }
+                        { ...this.state }
+                        getItems={ this.getItems }
+                        setActive={ this.setActive }
+                        removeMedia={ this.removeMedia }
+                        attachMedia={ this.attachMedia }
+
+                    /> }
                 </Drawer>
             </>
         )
