@@ -132,7 +132,7 @@ export default class Repeater extends Component {
             props.onChange = v => {
                 return this.onChange(props.name, index, v)
             }
-            
+
             if (typeof value[props.name] === 'object') {
                 props.value = JSON.stringify(value[props.name])
             } else {
@@ -147,15 +147,15 @@ export default class Repeater extends Component {
         return <Icon role="button" title={ `Reorder ${ this.button }` } type="column-height" className="cursor-move" />
     })
 
-    SortableItem = SortableElement(({ value, index }) => {
+    SortableItem = SortableElement(({ value, position }) => {
         return (
             <div data-repeater={ value._key } className="p-3 bg-gray-100 mb-4 flex rounded">
                 <div className="flex-1">
-                    { this.renderComponents(value, index) }
+                    { this.renderComponents(value, position) }
                 </div>
                 <div className="flex flex-col items-center pl-3 text-gray-500 hover:text-gray-500">
-                    <Icon role="button" title={`Add ${this.button} below`} type="plus-circle" className="mb-2" onClick={ () => this.addItem(index) } />
-                    <Icon role="button" title={`Remove ${this.button}`} type="minus-circle" className="mb-2" onClick={ () => this.removeItem(index) } />
+                    <Icon role="button" title={`Add ${this.button} below`} type="plus-circle" className="mb-2" onClick={ () => this.addItem(position) } />
+                    <Icon role="button" title={`Remove ${this.button}`} type="minus-circle" className="mb-2" onClick={ () => this.removeItem(position) } />
                     <this.DragHandle />
                 </div>
             </div>
@@ -169,6 +169,7 @@ export default class Repeater extends Component {
                     key={ value._key }
                     index={ index }
                     value={ value }
+                    position={ index }
                 />)}
             </div>
         )
