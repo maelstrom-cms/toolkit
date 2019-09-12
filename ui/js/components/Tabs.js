@@ -2,13 +2,9 @@ import React, { Component, createRef } from 'react'
 import { Tabs as TabSet, Icon } from 'antd'
 import debounce from 'lodash/debounce'
 import URI from 'urijs'
+import hasParentClass from '../support/HasParentClass';
 
 window.URI = URI
-
-function hasParentClass(element, classname) {
-    if ((element.className || '').split(' ').indexOf(classname)>=0) return true;
-    return element.parentNode && hasParentClass(element.parentNode, classname);
-}
 
 export default class Tabs extends Component {
 
