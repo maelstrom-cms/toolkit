@@ -119,10 +119,12 @@ export default class SelectInput extends Component {
             return this.renderSelect()
         }
 
+        const width = this.createButton.width || 100;
+
         return (
-            <div className="flex items-center">
-                <div className="flex-1 pr-2">{ this.renderSelect() }</div>
-                <div>{ this.renderExtras() }</div>
+            <div className="flex flex-wrap items-center">
+                <div className="pr-2" style={{ width: `calc(100% - ${width}px)`}}>{ this.renderSelect() }</div>
+                <div style={{ width }}>{ this.renderExtras() }</div>
             </div>
         )
     };
