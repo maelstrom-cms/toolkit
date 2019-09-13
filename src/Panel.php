@@ -1254,7 +1254,7 @@ class Panel
                 // ones with one that looks in the trash!
                 $router->bind($paramName, function ($id) {
                     /** @noinspection PhpUndefinedMethodInspection */
-                    return $this->query->withTrashed()->find($id);
+                    return $this->query->withTrashed()->where($this->query->getModel()->getRouteKeyName(), $id)->first();
                 });
             }
         }
