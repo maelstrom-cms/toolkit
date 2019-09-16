@@ -6,6 +6,7 @@
 
 .maelstrom-wrapper {
     min-width: 1400px;
+    overflow-x: auto;
 }
 
 .ant-btn-group + .ant-btn-group {
