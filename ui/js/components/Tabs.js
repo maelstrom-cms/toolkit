@@ -21,7 +21,7 @@ export default class Tabs extends Component {
             id: element.dataset.tab,
             icon: element.dataset.icon,
             active: JSON.parse(element.dataset.active),
-            hasError: !!element.querySelector('.has-error'),
+            hasError: (element.querySelector('.has-error') || Array.from(element.querySelectorAll('[data-error]')).find(element => element.dataset.error)),
         }
     });
 
