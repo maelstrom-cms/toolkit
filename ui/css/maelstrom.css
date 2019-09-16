@@ -4,6 +4,10 @@
 
 @import 'tailwindcss/utilities';
 
+.maelstrom-wrapper {
+    min-width: 1400px;
+}
+
 .ant-btn-group + .ant-btn-group {
     margin-left: 8px;
 }
