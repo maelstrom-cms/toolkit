@@ -17,6 +17,10 @@
 
     $value = old(str_replace('.', '_', $name), data_get($entry, $name, ($default ?? [])));
 
+    if (is_json_string($value)) {
+        $value = json_decode($value, true);
+    }
+
     $value = array_map(function ($item) {
         if (data_get($item, '_key', null) === null) {
             data_set($item, '_key', Str::uuid());

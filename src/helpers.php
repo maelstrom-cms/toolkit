@@ -42,3 +42,33 @@ if (!function_exists('maelstrom')) {
         }
     }
 }
+
+if (!function_exists('is_json_string')) {
+    /**
+     * @param $string
+     * @return bool
+     */
+    function is_json_string($string)
+    {
+        try {
+            $decoded = json_decode($string);
+        } catch (Exception $e) {
+            return false;
+        }
+
+        if (!is_object($decoded) && !is_array($decoded)) {
+            /*
+            If our string doesn't produce an object or array
+            it's invalid, so we should return false
+            */
+            return false;
+        }
+
+        /*
+        If the following line resolves to true, then there was
+        no error and our JSON is valid, so we return true.
+        Otherwise it isn't, so we return false.
+        */
+        return json_last_error() === JSON_ERROR_NONE;
+    }
+}
