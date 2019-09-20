@@ -50,6 +50,10 @@ if (!function_exists('is_json_string')) {
      */
     function is_json_string($string)
     {
+        if (!is_string($string)) {
+            return false;
+        }
+
         try {
             $decoded = json_decode($string);
         } catch (Exception $e) {
