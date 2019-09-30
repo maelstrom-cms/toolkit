@@ -37,7 +37,7 @@ export default class TimeInput extends Component {
         let value = ParseProps(props, 'value', undefined)
 
         this.state = {
-            value: value ? moment(value, this.saveFormat).utc() : null,
+            value: value ? moment(value, this.saveFormat) : null,
         }
     }
 

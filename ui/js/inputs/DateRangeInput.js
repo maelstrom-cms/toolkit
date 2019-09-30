@@ -61,7 +61,7 @@ export default class DateRangeInput extends Component {
             return true
         }
 
-        const now = moment.utc()
+        const now = moment()
 
         if (!this.allowPast && date.isBefore(now)) {
             return true
