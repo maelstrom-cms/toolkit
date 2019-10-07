@@ -102,7 +102,9 @@ export default class MediaManager extends React.Component {
     }
 
     attachMedia = item => {
-        if (this.state.attached.length < this.maxItems) {
+        const swapMode = this.maxItems === 1 && this.state.attached.length === 1;
+
+        if (this.state.attached.length < this.maxItems || swapMode) {
             if (this.maxItems > 1) {
                 let attached = [ ...this.state.attached ]
 
@@ -126,7 +128,7 @@ export default class MediaManager extends React.Component {
                 this.props.onChange && this.props.onChange(item.id)
             }
 
-            message.success(`${item.name} added.`)
+            message.success(`${item.name} attached.`)
         } else {
             message.error(`You can only attach ${this.maxItems} files.`)
         }
@@ -195,7 +197,7 @@ export default class MediaManager extends React.Component {
                         <Avatar className="cursor-pointer" src={ item.cached_thumbnail_url } onClick={ () => this.openItem(item) } />
                     }
                     title={ item.name }
-                    description={ item.cached_url }
+                    description={ `Dimensions: ${item.dimensions} Type: ${item.type} Alt: ${item.alt || 'Empty' } Tags: ${(item.tags || ['None']).join(', ')}` }
                 />
             </List.Item>
         )
