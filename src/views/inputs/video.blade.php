@@ -5,6 +5,10 @@
     if (is_object($value) && !count(get_object_vars($value))) {
         $value = null;
     }
+
+    if (is_json_string($value)) {
+        $value = json_decode($value);
+    }
 @endphp
 
 <div

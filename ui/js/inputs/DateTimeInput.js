@@ -35,7 +35,7 @@ export default class DateTimeInput extends Component {
         let value = ParseProps(props, 'value', undefined)
 
         this.state = {
-            value: value ? moment(value, this.saveFormat).utc() : null,
+            value: value ? moment(value, this.saveFormat) : null,
         }
     }
 
@@ -44,7 +44,7 @@ export default class DateTimeInput extends Component {
             return true
         }
 
-        const now = moment.utc()
+        const now = moment()
 
         if (!this.allowPast && date.isBefore(now)) {
             return true
