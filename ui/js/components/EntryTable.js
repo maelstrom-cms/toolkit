@@ -1,6 +1,7 @@
 import URI from 'urijs'
 import reqwest from 'reqwest'
 import uniq from 'lodash/uniq'
+import isString from 'lodash/isString'
 import React, { Component } from 'react'
 import ParseProps from '../support/ParseProps'
 import ComponentRegistry from '../support/Registry'
@@ -24,20 +25,35 @@ export default class EntryTable extends Component {
         this.mediaRoute = props.mediaRoute
 
         this.columns = ParseProps(props, 'columns', []).map(column => {
+            // If we provide a name, but no dataIndex, we fall back to using the name.
             if (column.name && !column.dataIndex) {
                 column.dataIndex = column.name
             }
 
             column.filteredValue = (this.filter[column.dataIndex] || column.filteredValue)
-            column.sortOrder = (this.sort.column === column.dataIndex ? this.sort.direction : column.sortOrder)
 
+            // If no title is assigned, make it the same as the label.
             if (column.label && !column.title) {
                 column.title = column.label
             }
 
+            // In case somebody accidentally called it sortable rather than sorter.
             if (column.sortable && !column.sorter) {
                 column.sorter = column.sortable
             }
+
+            // If we've got a sorter column name e.g. "created_at" rather than a boolean.
+            if (isString(column.sorter)) {
+                // We set the sort key to the value of the sorter so when it's applied it
+                // sends the real column to sort on rather than the dataIndex.
+                column.key = column.sorter
+
+                // We also then need to make sure the sorter is a boolean.
+                column.sorter = !!column.sorter
+            }
+
+            // This is what turns off/on the actual sort arrows if its "ascend" or "descend".
+            column.sortOrder = (this.sort.column === (column.key || column.dataIndex) ? this.sort.direction : column.sortOrder)
 
             if (column.filters) {
                 column.filters = column.filters.map(filter => {
@@ -180,7 +196,7 @@ export default class EntryTable extends Component {
         // Simple. Encode the sorter as JSON so can be easily used by PHP.
         if (Object.keys(sorter).length) {
             request.setQuery('sort', JSON.stringify({
-                column: sorter.field,
+                column: sorter.columnKey,
                 direction: sorter.order,
             }))
         } else {
