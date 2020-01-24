@@ -18,7 +18,7 @@ class Registry {
 
             this.items[name] = component
 
-            Array.from(document.querySelectorAll(`[data-component="${name}"]`)).forEach(element => {
+            Array.from(document.querySelectorAll(`[data-component="${name}"]`)).forEach(async element => {
                 const $el = element.cloneNode(true)
 
                 if (component.toLocaleString().indexOf('then(__webpack_require') !== -1) {
