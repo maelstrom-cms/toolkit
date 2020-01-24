@@ -4,13 +4,13 @@ import { render } from 'react-dom'
 class Registry {
 
     constructor() {
-        this.items = []
+        this.items = {}
     }
 
     register(components) {
         Object.keys(components).forEach(name => {
-            const component = components[name]
-            
+            let component = components[name]
+
             // Only register it once.
             if (this.items[name]) {
                 return
@@ -20,6 +20,11 @@ class Registry {
 
             Array.from(document.querySelectorAll(`[data-component="${name}"]`)).forEach(element => {
                 const $el = element.cloneNode(true)
+
+                if (component.toLocaleString().indexOf('then(__webpack_require') !== -1) {
+                    const lazyLoadedComponent = await component();
+                    component = lazyLoadedComponent.default;
+                }
 
                 render(
                     React.createElement(component, { ...element.dataset, $el }),
