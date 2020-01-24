@@ -100,7 +100,7 @@ export default class TextInput extends Component {
 
     renderTextArea = onChange => {
         return <Input.TextArea
-            autosize={ this.autoSize }
+            autoSize={ this.autoSize }
             value={ this.state.value }
             onChange={ onChange }
             disabled={ this.disabled }
