@@ -4,7 +4,7 @@ import { render } from 'react-dom'
 class Registry {
 
     constructor() {
-        this.items = []
+        this.items = {}
     }
 
     register(components) {
