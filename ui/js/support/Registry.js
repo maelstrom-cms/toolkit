@@ -45,6 +45,8 @@ class Registry {
     }
 }
 
-const registry = new Registry()
+if (!window.Registry) {
+    window.Registry = new Registry();
+}
 
-export default registry
+export default window.Registry
