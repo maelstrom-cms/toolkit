@@ -1189,7 +1189,7 @@ class Panel
             $sortDirection = $this->sort->direction ?: $this->defaultSortDirection;
             $sortColumn = $this->sort->column ?: $this->defaultSortColumn;
 
-            $this->query->orderBy($sortColumn, ($sortDirection === 'ascend' ? 'ASC' : 'DESC'));
+            $this->query->orderBy($sortColumn, (in_array($sortDirection, ['asc', 'ASC', 'ascend']) ? 'ASC' : 'DESC'));
         } elseif ($this->defaultSortColumn) {
             $this->query->orderBy($this->defaultSortColumn, $this->defaultSortDirection);
         }
