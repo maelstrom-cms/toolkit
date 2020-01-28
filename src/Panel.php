@@ -1835,4 +1835,65 @@ class Panel
         );
     }
 
+    /**
+     * @param Model $entry
+     * @param string $view
+     * @return View
+     */
+    public function quickForm(Model $entry, string $view)
+    {
+        $this->setEntry($entry);
+
+        return $this->edit($view);
+    }
+
+    /**
+     * @param Model $entry
+     * @param string $message
+     * @return RedirectResponse|Redirector
+     * @throws BindingResolutionException
+     * @throws ReflectionException
+     */
+    public function quickStore(string $message)
+    {
+        $this->store($message);
+
+        return $this->redirect('edit');
+    }
+
+    /**
+     * @param Model $entry
+     * @param string $message
+     * @return RedirectResponse|Redirector
+     * @throws BindingResolutionException
+     * @throws ReflectionException
+     */
+    public function quickUpdate(Model $entry, string $message)
+    {
+        $this->setEntry($entry);
+
+        $this->update($message);
+
+        return $this->redirect('edit');
+    }
+
+    /**
+     * @param Model $entry
+     * @param string $message
+     * @return RedirectResponse|Redirector
+     * @throws Exception
+     */
+    public function quickDestroy(Model $entry, string $message)
+    {
+        $this->setEntry($entry);
+
+        $message = trim($message) . ' ';
+
+        $message = method_exists($entry, 'trashed') && $entry->trashed() ? $message . 'restored.' : 'deleted.';
+
+        $this->destroy($message);
+
+        return $this->redirect($entry->exists() ? 'edit' : 'index');
+    }
+
 }
