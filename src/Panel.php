@@ -1186,8 +1186,8 @@ class Panel
         if ($this->sort && $this->isValidColumn($this->sort->column)) {
             // We also manually mutate the sorting to make sure we don't pass
             // user submitted data into the query.
-            $sortDirection = $this->sort->direction ?: $this->defaultSortDirection;
-            $sortColumn = $this->sort->column ?: $this->defaultSortColumn;
+            $sortDirection = $this->sort->direction ?? $this->defaultSortDirection;
+            $sortColumn = $this->sort->column ?? $this->defaultSortColumn;
 
             $this->query->orderBy($sortColumn, (in_array($sortDirection, ['asc', 'ASC', 'ascend']) ? 'ASC' : 'DESC'));
         } elseif ($this->defaultSortColumn) {
