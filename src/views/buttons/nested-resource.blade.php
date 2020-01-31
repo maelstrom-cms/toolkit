@@ -2,8 +2,8 @@
     data-component="NestedResource"
     data-url="{{ $url ?? '/' }}"
     data-icon="{{ $icon ?? 'plus'  }}"
-    data-button-text="{{ $button ?? 'Create' }}"
-    data-button-type="{{ $style ?? 'default' }}"
-    data-button-size="{{ $size ?? 'default' }}"
+    data-text="{{ $button ?? 'Create' }}"
+    data-type="{{ $style ?? 'default' }}"
+    data-size="{{ $size ?? 'default' }}"
 >
 </div>
