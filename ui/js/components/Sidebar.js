@@ -176,14 +176,18 @@ export default class Sidebar extends Component {
             this.defaultSelectedKeys.push(item.id)
 
             // If it can be collapsed, we can expand he collapser.
-            if (item.type === 'collapsible' || item.type === 'submenu') {
+            const itemType = item.type.toLowerCase()
+
+            if (itemType === 'collapsible' || itemType === 'submenu') {
                 this.defaultOpenKeys.push(item.id)
             }
 
             if (parent && !this.state.collapsed) {
                 this.defaultSelectedKeys.push(parent.id)
 
-                if (parent.type === 'collapsible' || parent.type === 'submenu') {
+                const parentType = parent.type.toLowerCase()
+
+                if (parentType === 'collapsible' || parentType === 'submenu') {
                     this.defaultOpenKeys.push(parent.id)
                 }
             }
