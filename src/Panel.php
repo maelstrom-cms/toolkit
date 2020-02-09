@@ -1889,7 +1889,7 @@ class Panel
 
         $message = trim($message) . ' ';
 
-        $message = method_exists($entry, 'trashed') && $entry->trashed() ? $message . 'restored.' : 'deleted.';
+        $message = method_exists($entry, 'trashed') && $entry->trashed() ? ($message . 'restored.') : ($message . 'deleted.');
 
         $this->destroy($message);
 
