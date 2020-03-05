@@ -95,7 +95,7 @@ export default class EntryTable extends Component {
 
         this.search = this.uri.hasQuery('search') ? JSON.parse(this.uri.query(true).search) : {
             query: null,
-            column: this.searchableColumns.length ? this.searchableColumns[0].title : null,
+            column: this.searchableColumns.length ? (this.searchableColumns[0].searchColumn || this.searchableColumns[0].title) : null,
         }
 
         this.state = {
