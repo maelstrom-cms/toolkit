@@ -1048,10 +1048,18 @@ class Panel
     public function getColumns(): array
     {
         /** @noinspection PhpUndefinedMethodInspection */
+
         // This just checks the DB for what columns are on the model
-        return Schema::getColumnListing(
-            $this->query->getModel()->getTable()
+        $columns = Schema::getColumnListing(
+            $table = $this->query->getModel()->getTable()
         );
+
+        // Now we create unambiguous column names in case we're joining other tables.
+        foreach ($columns as $column) {
+            $columns[] = sprintf('%s.%s', $table, $column);
+        }
+
+        return $columns;
     }
 
     /**
