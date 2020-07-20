@@ -7,6 +7,31 @@ import ParseProps from '../support/ParseProps'
 import { Drawer, Button, Form, message, List, Avatar, Icon } from 'antd'
 import { SortableContainer, SortableElement, SortableHandle } from 'react-sortable-hoc'
 
+const DragHandle = SortableHandle(() => {
+    return <Icon type="column-height" className="cursor-move mr-3" />
+})
+
+const SortableItem = SortableElement(({ item, context }) => {
+    return (
+        <List.Item actions={ [ context.renderActions(item) ] }>
+            <List.Item.Meta
+                avatar={ <Avatar className="cursor-pointer" src={ item.cached_thumbnail_url } onClick={ () => context.openItem(item) } />}
+                title={ item.name }
+                description={ `Dimensions: ${item.dimensions} Type: ${item.type} Alt: ${item.alt || 'Empty' } Tags: ${(item.tags || ['None']).join(', ')}` }
+            />
+        </List.Item>
+    )
+})
+
+const SortableList = SortableContainer(({ items, context }) => {
+    return (
+        <List
+            className="mt-4"
+            dataSource={ items }
+            renderItem={ (item, index) => <SortableItem context={ context } index={ index } item={ item } /> }
+        />)
+})
+
 export default class MediaManager extends React.Component {
 
     constructor(props) {
@@ -179,46 +204,19 @@ export default class MediaManager extends React.Component {
     renderActions = item => {
         return (
             <>
-                { this.state.attached.length > 1 && <this.DragHandle /> }
+                { this.state.attached.length > 1 && <DragHandle /> }
                 <Button type="danger" onClick={ () => this.removeMedia(item) }>Remove</Button>
             </>
         )
     }
-
-    DragHandle = SortableHandle(() => {
-        return <Icon type="column-height" className="cursor-move mr-3" />
-    })
-
-    SortableItem = SortableElement(({ item }) => {
-        return (
-            <List.Item actions={ [ this.renderActions(item) ] }>
-                <List.Item.Meta
-                    avatar={
-                        <Avatar className="cursor-pointer" src={ item.cached_thumbnail_url } onClick={ () => this.openItem(item) } />
-                    }
-                    title={ item.name }
-                    description={ `Dimensions: ${item.dimensions} Type: ${item.type} Alt: ${item.alt || 'Empty' } Tags: ${(item.tags || ['None']).join(', ')}` }
-                />
-            </List.Item>
-        )
-    })
-
-    SortableList = SortableContainer(({ items }) => {
-        return (
-            <List
-                className="mt-4"
-                dataSource={ items }
-                renderItem={ (item, index) => <this.SortableItem index={ index } item={ item } /> }
-            />
-        )
-    })
 
     renderFileList = () => {
         if (!this.state.attached.length) {
             return null
         }
 
-        return <this.SortableList
+        return <SortableList
+            context={ this }
             useDragHandle={ true }
             items={ this.state.attached }
             onSortEnd={ this.onSortEnd }
