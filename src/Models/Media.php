@@ -106,7 +106,7 @@ class Media extends Model
      */
     public function extractDimensions(UploadedFile $file)
     {
-        if (Str::endsWith($this->getAttribute('type'), 'svg')) {
+        if (Str::endsWith($this->getAttribute('type'), ['svg', 'svg+xml'])) {
             $xml = simplexml_load_file($file->getRealPath());
             $attr = $xml->attributes();
 
@@ -222,7 +222,7 @@ class Media extends Model
      */
     public function generateThumbnail(UploadedFile $file)
     {
-        if (Str::endsWith($this->getAttribute('type'), 'svg')) {
+        if (Str::endsWith($this->getAttribute('type'), ['svg', 'svg+xml'])) {
             $this->generateSvgThumbnail($file);
         } elseif (Str::startsWith($this->getAttribute('type'), 'image')) {
             $this->generateBitmapThumbnail($file);
