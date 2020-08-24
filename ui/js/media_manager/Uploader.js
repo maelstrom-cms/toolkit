@@ -61,6 +61,7 @@ export default class Uploader extends React.Component {
                 accept="image/*,.pdf,.svg"
                 action={ this.props.route }
                 onChange={ this.onChange }
+                onError={ this.onError }
                 showUploadList={ false }
                 withCredentials={ true }
                 data={ this.uploadData }
