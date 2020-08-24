@@ -1,6 +1,9 @@
 import React from 'react'
 import { Upload, Icon } from 'antd'
 import debounce from 'lodash/debounce'
+import get from 'lodash/get'
+import first from 'lodash/first'
+import toArray from 'lodash/toArray'
 
 export default class Uploader extends React.Component {
 
@@ -23,6 +26,18 @@ export default class Uploader extends React.Component {
             busy,
         })
     }.bind(this), 500)
+
+    onError = (error, body) => {
+        const errorMessage = first(first(toArray(get(body, 'errors', [])))) || 'Sorry an unknown error occured, please try again.'
+
+        message.error(errorMessage)
+
+        setTimeout(() => {
+            this.setState({
+                busy: false,
+            })
+        }, 700)
+    }
 
     beforeUpload = () => {
         this.setState({
