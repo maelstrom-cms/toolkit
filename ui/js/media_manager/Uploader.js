@@ -1,5 +1,5 @@
 import React from 'react'
-import { Upload, Icon } from 'antd'
+import { Upload, Icon, message } from 'antd'
 import debounce from 'lodash/debounce'
 import get from 'lodash/get'
 import first from 'lodash/first'
